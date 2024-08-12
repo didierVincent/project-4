@@ -4,6 +4,11 @@ const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 6;
 
+const fatigueSchema = new Schema({
+  torsoFatigue: { type: Number, default: 0 },
+  armsFatigue: { type: Number, default: 0 },
+  legsFatigue: { type: Number, default: 0 },
+});
 const userSchema = new Schema(
   {
     name: { type: String, required: true },
@@ -20,6 +25,7 @@ const userSchema = new Schema(
       minLength: 3,
       required: true,
     },
+    fatigue: { type: fatigueSchema, default: () => ({}) },
   },
   {
     timestamps: true,
