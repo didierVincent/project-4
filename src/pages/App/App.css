@@ -8,6 +8,12 @@
   --orange: #f67f00;
   --text-light: #968c84;
   --text-dark: #615954;
+  --col-1: #0d0106;
+  --col-2: #3626a7;
+  --col-3: #4e52be;
+  --col-4: #657ed4;
+  --col-5: #ff331f;
+  --col-6: #fbfbff;
 }
 
 *,
@@ -26,6 +32,7 @@ body {
   background-color: var(--tan-4);
   padding: 2vmin;
   height: 100vh;
+  background-color: var(--col-1);
 }
 
 code {
@@ -124,7 +131,7 @@ a.button {
   margin: 1vmin;
   padding: 1vmin;
   color: var(--white);
-  background-color: var(--orange);
+  background-color: var(--col-2);
   font-size: 2vmin;
   font-weight: bold;
   text-decoration: none;

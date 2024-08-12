@@ -1,0 +1,11 @@
+.ExerciseListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3vmin;
+  padding: 2vmin;
+  background-color: var(--col-3);
+  border: 0.1vmin solid var(--tan-3);
+  border-radius: 1vmin;
+  font-size: 16px;
+}
