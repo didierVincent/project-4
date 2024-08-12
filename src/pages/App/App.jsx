@@ -16,7 +16,10 @@ export default function App() {
           <NavBar user={user} setUser={setUser} />
           <Routes>
             <Route path="/" element={<Navigate to="/workouts/new" />} />
-            <Route path="/workouts/new" element={<NewWorkoutPage />} />
+            <Route
+              path="/workouts/new"
+              element={<NewWorkoutPage user={user} setUser={setUser} />}
+            />
           </Routes>
         </>
       ) : (
