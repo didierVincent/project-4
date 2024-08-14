@@ -1,22 +1,16 @@
 .NewWorkoutPage {
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1.1fr 1.3fr;
+  grid-template-columns: 1.3fr 1fr 1.8fr;
   grid-template-rows: 1fr;
   background-color: var(--col-4);
   border-radius: 2vmin;
+  gap: 32px;
 }
 
 .NewWorkoutPage aside {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   margin: 3vmin 2vmin;
-}
-
-th,
-td {
-  border: 1px solid;
-  padding: 15px;
 }

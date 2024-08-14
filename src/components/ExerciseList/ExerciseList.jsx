@@ -1,17 +1,38 @@
 import "./ExerciseList.css";
 import ExerciseListItem from "../ExerciseListItem/ExerciseListItem";
 
-export default function ExerciseList({ exerciseList, activeCat }) {
+export default function ExerciseList({
+  exerciseList,
+  activeCat,
+  handleAddToWorkout,
+}) {
+  // display only exercises with selected muscle category
   const catExercises = exerciseList.filter((exercise) =>
     exercise.muscle.some((m) => m.name === activeCat)
   );
+
+  const catFatigue = {
+    Torso: "torsoFatigue",
+    Arms: "armsFatigue",
+    Legs: "legsFatigue",
+  };
+
+  const currCat = catFatigue[activeCat];
+
+  if (currCat) {
+    catExercises.sort((a, b) => b[currCat] - a[currCat]);
+  }
+
   const exercises = catExercises.map((exercise) => (
-    <ExerciseListItem key={exercise._id} exercises={exercise} />
+    <ExerciseListItem
+      key={exercise._id}
+      exercises={exercise}
+      handleAddToWorkout={handleAddToWorkout}
+    />
   ));
   return (
     <>
-      <h3 className="ExerciseList">ExerciseList</h3>
-      <div>{exercises}</div>
+      <div className="ExerciseList">{exercises}</div>
     </>
   );
 }

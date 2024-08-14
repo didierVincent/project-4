@@ -1,0 +1,76 @@
+.Exercise .grid-ctr1 {
+  display: grid;
+  align-items: center;
+  justify-content: left;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "gd bt";
+}
+
+.Exercise .grid-ctr2 {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4fr 1fr 2fr);
+  grid-template-areas:
+    "t t"
+    "ed fl"
+    "ed fl";
+  width: 550px;
+  margin-bottom: 3vmin;
+  padding: 5px;
+  background-color: var(--fat-5);
+  border: 0.1vmin solid var(--tan-3);
+  border-radius: 1vmin;
+  font-size: 16px;
+  grid-area: gd;
+}
+
+.Exercise .ExerciseTitle {
+  text-align: center;
+  width: 450px;
+  font-weight: bold;
+  font-size: 18px;
+  grid-area: t;
+}
+
+.Exercise .tables {
+  background-color: aqua;
+  grid-area: tb;
+}
+
+.Exercise table {
+  border: 1px solid;
+  border-radius: 1vmin;
+  margin: 7px auto;
+  padding: 10%;
+  font-size: 100%;
+  margin: 10px auto;
+}
+
+.Exercise .remove-btn {
+  background-color: var(--fat-6);
+  text-align: center;
+  font-size: 70%;
+  padding: 5px;
+}
+
+.Exercise .exercise-dmg {
+  grid-area: ed;
+}
+
+.Exercise .new-fatigue-lvl {
+  grid-area: fl;
+}
+
+.Exercise .small-btn {
+  text-align: center;
+  margin: 0 auto;
+  margin-left: 8px;
+  width: 6%;
+  font-size: 14px;
+  padding: 4px;
+}
+
+.Exercise small {
+  line-height: 150%;
+}
