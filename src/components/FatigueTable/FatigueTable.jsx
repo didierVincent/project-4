@@ -3,12 +3,35 @@ import "./FatigueTable.css";
 export default function FatigueTable({ user, workout }) {
   const backgroundColorScale = {
     0: "var(--fat-0)",
-    1: "var(--fat-1)",
-    2: "var(--fat-2)",
-    3: "var(--fat-3)",
-    4: "var(--fat-4)",
-    5: "var(--fat-5)",
-    6: "var(--fat-6)",
+    1: "var(--fat-0)",
+    2: "var(--fat-0)",
+    3: "var(--fat-0)",
+    4: "var(--fat-0)",
+    5: "var(--fat-1)",
+    6: "var(--fat-1)",
+    7: "var(--fat-1)",
+    8: "var(--fat-1)",
+    9: "var(--fat-1)",
+    10: "var(--fat-2)",
+    11: "var(--fat-2)",
+    12: "var(--fat-2)",
+    13: "var(--fat-2)",
+    14: "var(--fat-2)",
+    15: "var(--fat-3)",
+    16: "var(--fat-3)",
+    17: "var(--fat-3)",
+    18: "var(--fat-3)",
+    19: "var(--fat-3)",
+    20: "var(--fat-4)",
+    21: "var(--fat-4)",
+    22: "var(--fat-4)",
+    23: "var(--fat-4)",
+    24: "var(--fat-4)",
+    25: "var(--fat-5)",
+    26: "var(--fat-5)",
+    27: "var(--fat-5)",
+    28: "var(--fat-5)",
+    29: "var(--fat-5)",
   };
 
   const torso =
@@ -18,9 +41,9 @@ export default function FatigueTable({ user, workout }) {
   const legs =
     workout.initFatigue.legsFatigue + workout.addedFatigue.legsFatigue;
 
-  const torsoFat = backgroundColorScale[torso] || "grey";
-  const armsFat = backgroundColorScale[arms] || "grey";
-  const legsFat = backgroundColorScale[legs] || "grey";
+  const torsoFat = backgroundColorScale[torso] || "var(--fat-6)";
+  const armsFat = backgroundColorScale[arms] || "var(--fat-6)";
+  const legsFat = backgroundColorScale[legs] || "var(--fat-6)";
 
   return (
     <div className="FatigueTable">
@@ -35,9 +58,9 @@ export default function FatigueTable({ user, workout }) {
           <tr>
             <td>Torso</td>
             <td style={{ backgroundColor: torsoFat }}>
-              work.init + workout.added <br />
-              {workout.initFatigue.torsoFatigue} +{" "}
-              {workout.addedFatigue.torsoFatigue} = {torso}
+              {/* work.init + workout.added <br /> */}
+              {/* {workout.initFatigue.torsoFatigue} + {workout.addedFatigue.torsoFatigue} =  */}
+              {torso}
             </td>
           </tr>
           <tr>
@@ -50,26 +73,7 @@ export default function FatigueTable({ user, workout }) {
           </tr>
         </tbody>
       </table>
-      <br />
-      <div>Color Scale:</div>
-      <table>
-        <tbody>
-          <tr>
-            <td style={{ backgroundColor: backgroundColorScale[0] }}>0</td>
-            <td style={{ backgroundColor: backgroundColorScale[1] }}>1</td>
-            <td style={{ backgroundColor: backgroundColorScale[2] }}>2</td>
-            <td style={{ backgroundColor: backgroundColorScale[3] }}>3</td>
-            <td style={{ backgroundColor: backgroundColorScale[4] }}>4</td>
-            <td style={{ backgroundColor: backgroundColorScale[5] }}>5</td>
-            <td style={{ backgroundColor: backgroundColorScale[6] }}>6</td>
-          </tr>
-          <tr>
-            <td colSpan="5">Safe!</td>
-            <td colSpan="2"> Risky!</td>
-          </tr>
-        </tbody>
-      </table>
-      user.fat --> {user.fatigue.torsoFatigue}
+      {/* user.fat.torsoFat --> {user.fatigue.torsoFatigue} */}
     </div>
   );
 }

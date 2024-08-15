@@ -1,5 +1,9 @@
 .FatigueTable th,
-td {
+.FatigueTable td {
   border: 1px solid var(--col-6);
+  padding: 5px 30px 5px 30px;
+}
+
+.FatigueTable table {
   padding: 15px;
 }

@@ -1,0 +1,31 @@
+.ColorScale table {
+  height: auto;
+  padding: 0px;
+  text-align: center;
+  text-align: center;
+}
+
+.ColorScale th,
+.ColorScale td {
+  border: 1px solid var(--col-6);
+  width: 48px;
+  padding: 5px;
+  font-weight: light;
+}
+
+.ColorScale th {
+  font-size: small;
+}
+
+.ColorScale .safe,
+.ColorScale .risky {
+  opacity: 0.7;
+  text-align: center;
+  color: var(--col-1);
+  background-color: var(--col-6);
+}
+
+.ColorScale .risky {
+  color: var(--fat-6);
+  opacity: 0.9;
+}
