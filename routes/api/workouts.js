@@ -9,6 +9,7 @@ router.post("/workout/exercises/:id", workoutsCtrl.addToWorkout);
 
 router.delete("/workout/exercises/:id", workoutsCtrl.removeExerciseInWorkout);
 
+router.put("/workout/qty", workoutsCtrl.changeExerciseQty);
 // // POST /api/workouts/cart/checkout
 // router.post("/cart/checkout", workoutsCtrl.checkout);
 // // POST /api/workouts/cart/qty
