@@ -1,0 +1,12 @@
+.ManualButtons {
+  text-align: center;
+}
+
+.ManualButtons p {
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+.ManualButtons button {
+  font-size: 12px;
+}

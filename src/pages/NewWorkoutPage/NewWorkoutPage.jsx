@@ -8,6 +8,9 @@ import FatigueTable from "../../components/FatigueTable/FatigueTable";
 import MuscleList from "../../components/MuscleList/MuscleList";
 import ExerciseList from "../../components/ExerciseList/ExerciseList";
 import WorkoutDetail from "../../components/WorkoutDetail/WorkoutDetail";
+import ColorScale from "../../components/ColorScale/ColorScale";
+import SVGBodyModel from "../../components/SVGBodyModel/SVGBodyModel";
+import ManualButtons from "../../components/ManualButtons/ManualButtons";
 
 export default function NewWorkoutPage({ user, setUser }) {
   const [exerciseList, setExerciseList] = useState([]);
@@ -83,14 +86,17 @@ export default function NewWorkoutPage({ user, setUser }) {
         <>
           <aside>
             {/* replace table below with svg later */}
+            <SVGBodyModel user={user} workout={workout} />
             <FatigueTable user={user} workout={workout} />
+            <ColorScale user={user} workout={workout} />
+            <ManualButtons />
+          </aside>
+          <div className="middle">
             <MuscleList
               categories={categoriesRef.current}
               activeCat={activeCat}
               setActiveCat={setActiveCat}
             />
-          </aside>
-          <div>
             <ExerciseList
               loading={loading}
               exerciseList={exerciseList}
