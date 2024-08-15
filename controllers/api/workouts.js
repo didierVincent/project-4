@@ -1,5 +1,5 @@
 const Workout = require("../../models/workout");
-// const Item = require('../../models/item');
+const User = require("../../models/user");
 
 module.exports = {
   show,
@@ -9,25 +9,27 @@ module.exports = {
   //   checkout,
 };
 
-// A cart is the unpaid order for a user
+// Find/Create workout for user
 async function show(req, res) {
-  const workout = await Workout.getWorkout(req.user._id);
+  const userId = req.user._id;
+  const workout = await Workout.getWorkout(userId);
+  console.log("this is a log of workout -->", workout);
   res.json(workout);
 }
 
-// Add an item to the cart
+// Add an exercise to the workout
 async function addToWorkout(req, res) {
-  const workout = await Workout.getWorkout(req.user._id);
-  await workout.addExerciseToWorkout(req.params.id);
+  const userId = req.user._id;
+  const workout = await Workout.getWorkout(userId);
+  const exerciseId = req.params.id;
+  await workout.addExerciseToWorkout(exerciseId);
   res.json(workout);
 }
 
 async function removeExerciseInWorkout(req, res) {
-  console.log("WE ARE HITTING THIS BUTTON IN CONTROLLERS");
   const workout = await Workout.getWorkout(req.user._id);
   await workout.deleteExercise(req.body.exerciseId);
   res.json(workout);
-  console.log("req.body.exerciseId -->", req.body.exerciseId);
 }
 // // Updates an item's qty in the cart
 // async function setItemQtyInCart(req, res) {

@@ -1,6 +1,6 @@
 import "./FatigueTable.css";
 
-export default function FatigueTable({ user }) {
+export default function FatigueTable({ user, workout }) {
   const backgroundColorScale = {
     0: "var(--fat-0)",
     1: "var(--fat-1)",
@@ -11,16 +11,23 @@ export default function FatigueTable({ user }) {
     6: "var(--fat-6)",
   };
 
-  const torsoFat = backgroundColorScale[user.fatigue.torsoFatigue] || "grey";
-  const armsFat = backgroundColorScale[user.fatigue.armsFatigue] || "grey";
-  const legsFat = backgroundColorScale[user.fatigue.legsFatigue] || "grey";
+  const torso =
+    workout.initFatigue.torsoFatigue + workout.addedFatigue.torsoFatigue;
+  const arms =
+    workout.initFatigue.armsFatigue + workout.addedFatigue.armsFatigue;
+  const legs =
+    workout.initFatigue.legsFatigue + workout.addedFatigue.legsFatigue;
+
+  const torsoFat = backgroundColorScale[torso] || "grey";
+  const armsFat = backgroundColorScale[arms] || "grey";
+  const legsFat = backgroundColorScale[legs] || "grey";
 
   return (
     <div className="FatigueTable">
       <table>
         <tbody>
           <tr>
-            <th>Muscle</th>
+            <th>{user.name}'s Muscles</th>
             <th>
               Fatigue <br /> (Levels 0-6)
             </th>
@@ -28,20 +35,18 @@ export default function FatigueTable({ user }) {
           <tr>
             <td>Torso</td>
             <td style={{ backgroundColor: torsoFat }}>
-              {user.fatigue.torsoFatigue}
+              work.init + workout.added <br />
+              {workout.initFatigue.torsoFatigue} +{" "}
+              {workout.addedFatigue.torsoFatigue} = {torso}
             </td>
           </tr>
           <tr>
             <td>Arms</td>
-            <td style={{ backgroundColor: armsFat }}>
-              {user.fatigue.armsFatigue}
-            </td>
+            <td style={{ backgroundColor: armsFat }}>{arms}</td>
           </tr>
           <tr>
             <td>Legs</td>
-            <td style={{ backgroundColor: legsFat }}>
-              {user.fatigue.legsFatigue}
-            </td>
+            <td style={{ backgroundColor: legsFat }}>{legs}</td>
           </tr>
         </tbody>
       </table>
@@ -64,6 +69,7 @@ export default function FatigueTable({ user }) {
           </tr>
         </tbody>
       </table>
+      user.fat --> {user.fatigue.torsoFatigue}
     </div>
   );
 }

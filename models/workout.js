@@ -29,6 +29,7 @@ const workoutSchema = new Schema(
       required: true,
     },
     exerciseList: [exerciseContainerSchema],
+    initFatigue: { type: fatigueSchema, default: () => ({}) },
     addedFatigue: { type: fatigueSchema, default: () => ({}) },
     isDone: { type: Boolean, default: false },
   },
@@ -50,15 +51,27 @@ const workoutSchema = new Schema(
 //   return this.id.slice(-6).toUpperCase();
 // });
 
-workoutSchema.statics.getWorkout = function (userId) {
-  return this.findOneAndUpdate(
-    // query object
-    { user: userId, isDone: false },
-    // update doc - provides values when inserting
-    { user: userId },
-    // upsert option
-    { upsert: true, new: true }
-  );
+workoutSchema.statics.getWorkout = async function (userId) {
+  const workout = this;
+
+  const User = mongoose.model("User");
+  const user = await User.findById(userId);
+
+  const existingWorkout = await this.findOne({ user: userId, isDone: false });
+
+  if (existingWorkout) {
+    // Return the existing workout without any updates
+    return existingWorkout;
+  } else {
+    return workout.findOneAndUpdate(
+      // query object
+      { user: userId, isDone: false },
+      // update doc - provides values when inserting
+      { user: userId, initFatigue: user.fatigue },
+      // upsert option
+      { upsert: true, new: true }
+    );
+  }
 };
 
 // Instance method for adding an item to a cart (unpaid order)
@@ -69,50 +82,45 @@ workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
   const existingExerciseContainer = workout.exerciseList.find((exerContainer) =>
     exerContainer.exercise._id.equals(exerciseId)
   );
-  const existingExercise = existingExerciseContainer.exercise;
 
-  const User = mongoose.model("User");
-  const user = await User.findById(workout.user);
-
-  if (existingExercise) {
+  if (existingExerciseContainer) {
     // It already exists, so increase the qty
-    console.log("this is user --> ", user);
     existingExerciseContainer.qty += 1;
+    const existingExercise = existingExerciseContainer.exercise;
     workout.addedFatigue.torsoFatigue += existingExercise.torsoFatigue;
     workout.addedFatigue.armsFatigue += existingExercise.armsFatigue;
     workout.addedFatigue.legsFatigue += existingExercise.legsFatigue;
-
-    // user.fatigue.torsoFatigue += exercise.torsoFatigue;
-    // user.fatigue.armsFatigue += exercise.armsFatigue;
-    // user.fatigue.legsFatigue += exercise.legsFatigue;
   } else {
     // Get the item from the "catalog"
     // Note how the mongoose.model method behaves as a getter when passed one arg vs. two
-
-    // workout.addedFatigue.torsoFatigue += exercise.torsoFatigue;
-    // workout.addedFatigue.armsFatigue += exercise.armsFatigue;
-    // workout.addedFatigue.legsFatigue += exercise.legsFatigue;
-
-    // user.fatigue.torsoFatigue += exercise.torsoFatigue;
-    // user.fatigue.armsFatigue += exercise.armsFatigue;
-    // user.fatigue.legsFatigue += exercise.legsFatigue;
-
-    // The qty of the new exercise object being pushed in defaults to 1
     const Exercise = mongoose.model("Exercise");
     const exercise = await Exercise.findById(exerciseId);
+
+    workout.addedFatigue.torsoFatigue += exercise.torsoFatigue;
+    workout.addedFatigue.armsFatigue += exercise.armsFatigue;
+    workout.addedFatigue.legsFatigue += exercise.legsFatigue;
+
     workout.exerciseList.push({ exercise });
   }
   // return the save() method's promise
-  // user.save();
+
   return workout.save();
 };
 
 workoutSchema.methods.deleteExercise = function (exerciseId) {
   const workout = this;
-  const exercise = workout.exerciseList.find((e) =>
+  const existingExerciseContainer = workout.exerciseList.find((e) =>
     e.exercise._id.equals(exerciseId)
   );
-  exercise.deleteOne();
+  const exerciseData = existingExerciseContainer.exercise;
+
+  workout.addedFatigue.torsoFatigue -=
+    existingExerciseContainer.qty * exerciseData.torsoFatigue;
+  workout.addedFatigue.armsFatigue -=
+    existingExerciseContainer.qty * exerciseData.armsFatigue;
+  workout.addedFatigue.legsFatigue -=
+    existingExerciseContainer.qty * exerciseData.legsFatigue;
+  existingExerciseContainer.deleteOne();
   return workout.save();
 };
 

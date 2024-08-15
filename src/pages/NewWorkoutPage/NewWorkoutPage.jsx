@@ -63,29 +63,33 @@ export default function NewWorkoutPage({ user, setUser }) {
 
   return (
     <main className="NewWorkoutPage">
-      <aside>
-        {/* replace table below with svg later */}
-        <FatigueTable user={user} />
-        <MuscleList
-          categories={categoriesRef.current}
-          activeCat={activeCat}
-          setActiveCat={setActiveCat}
-        />
-      </aside>
-      <div>
-        <ExerciseList
-          exerciseList={exerciseList}
-          activeCat={activeCat}
-          handleAddToWorkout={handleAddToWorkout}
-        />
-      </div>
-      <div>
-        <WorkoutDetail
-          workout={workout}
-          user={user}
-          handleRemoveExercise={handleRemoveExercise}
-        />
-      </div>
+      {workout ? (
+        <>
+          <aside>
+            {/* replace table below with svg later */}
+            <FatigueTable user={user} workout={workout} />
+            <MuscleList
+              categories={categoriesRef.current}
+              activeCat={activeCat}
+              setActiveCat={setActiveCat}
+            />
+          </aside>
+          <div>
+            <ExerciseList
+              exerciseList={exerciseList}
+              activeCat={activeCat}
+              handleAddToWorkout={handleAddToWorkout}
+            />
+          </div>
+          <div>
+            <WorkoutDetail
+              workout={workout}
+              user={user}
+              handleRemoveExercise={handleRemoveExercise}
+            />
+          </div>
+        </>
+      ) : null}
     </main>
   );
 }
