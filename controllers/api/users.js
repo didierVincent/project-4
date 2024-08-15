@@ -6,6 +6,7 @@ module.exports = {
   create,
   login,
   checkToken,
+  fetchData,
 };
 
 async function login(req, res) {
@@ -47,4 +48,10 @@ function createJWT(user) {
     process.env.SECRET,
     { expiresIn: "24h" }
   );
+}
+
+async function fetchData(req, res) {
+  const newUserData = await User.findOne({ _id: req.user._id });
+  console.log("this is newUserData --> ", newUserData);
+  res.json(newUserData);
 }

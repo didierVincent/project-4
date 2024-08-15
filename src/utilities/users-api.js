@@ -14,3 +14,8 @@ export function login(credentials) {
 export function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }
+
+// created this to try retrieve new user data... didnt work
+export function fetchData() {
+  return sendRequest(`${BASE_URL}/fetch-data`);
+}

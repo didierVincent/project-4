@@ -2,16 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import * as exercisesAPI from "../../utilities/exercise-api";
 import * as musclesAPI from "../../utilities/muscle-api";
 import * as workoutsAPI from "../../utilities/workout-api";
+import * as usersAPI from "../../utilities/users-api";
 import "./NewWorkoutPage.css";
 import FatigueTable from "../../components/FatigueTable/FatigueTable";
 import MuscleList from "../../components/MuscleList/MuscleList";
 import ExerciseList from "../../components/ExerciseList/ExerciseList";
 import WorkoutDetail from "../../components/WorkoutDetail/WorkoutDetail";
 
-export default function NewWorkoutPage({ user, onWorkoutUpdated }) {
+export default function NewWorkoutPage({ user, setUser }) {
   const [exerciseList, setExerciseList] = useState([]);
   const [activeCat, setActiveCat] = useState("");
-  const [userFatigue, setUserFatigue] = useState([]);
   const [workout, setWorkout] = useState(null);
   const categoriesRef = useRef([]);
 
@@ -19,11 +19,9 @@ export default function NewWorkoutPage({ user, onWorkoutUpdated }) {
     async function getExercises() {
       const exercises = await exercisesAPI.getAll();
       const muscleCats = await musclesAPI.getAll();
-      const userFatigue = await userFatigueAPI.getUserFatigue(user._id);
       categoriesRef.current = [
         ...new Set(muscleCats.map((muscle) => muscle.name)),
       ];
-      setUserFatigue(userFatigue);
       setActiveCat(categoriesRef.current[0]);
       setExerciseList(exercises);
     }
@@ -36,11 +34,24 @@ export default function NewWorkoutPage({ user, onWorkoutUpdated }) {
     getWorkout();
   }, []);
 
+  useEffect(
+    function () {
+      async function fetchUserData() {
+        const updatedUser = await usersAPI.fetchData();
+        if (
+          JSON.stringify(updatedUser.fatigue) !== JSON.stringify(user.fatigue)
+        ) {
+          setUser(updatedUser);
+        }
+      }
+      fetchUserData();
+    },
+    [workout]
+  );
+
   async function handleAddToWorkout(exerciseId) {
     const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
     setWorkout(updatedWorkout);
-    onWorkoutUpdated();
-    // setUser(user);
   }
 
   async function handleRemoveExercise(exerciseId) {

@@ -8,6 +8,7 @@ const usersCtrl = require("../../controllers/api/users");
 const ensureLoggedIn = require("../../config/ensureLoggedIn");
 
 router.get("/check-token", usersCtrl.checkToken);
+router.get("/fetch-data", usersCtrl.fetchData);
 
 // POST /api/users
 router.post("/", usersCtrl.create);
