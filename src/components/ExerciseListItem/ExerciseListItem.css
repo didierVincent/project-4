@@ -17,11 +17,12 @@
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
   font-size: 16px;
+  border: 1px solid white;
   grid-area: g2;
 }
 
 .ExerciseListItem table {
-  border: 1px solid;
+  border: 1px solid white;
   border-radius: 1vmin;
   margin: 7px auto;
   padding: 10%;

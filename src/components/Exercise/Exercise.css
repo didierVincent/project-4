@@ -12,9 +12,9 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4fr 1fr 2fr);
   grid-template-areas:
-    "t t"
-    "ed fl"
-    "ed fl";
+    "t ed"
+    "t ed"
+    "t ed";
   width: 550px;
   margin-bottom: 3vmin;
   padding: 5px;
