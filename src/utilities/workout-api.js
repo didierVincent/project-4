@@ -18,3 +18,10 @@ export function removeExerciseFromWorkout(exerciseId) {
     exerciseId,
   });
 }
+
+export function changeExerciseQty(exerciseId, newQty) {
+  return sendRequest(`${BASE_URL}/workout/qty`, "PUT", {
+    exerciseId,
+    newQty,
+  });
+}

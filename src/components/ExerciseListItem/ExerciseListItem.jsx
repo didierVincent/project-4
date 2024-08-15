@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "./ExerciseListItem.css";
 
-export default function ExerciseListItem({ exercises, handleAddToWorkout }) {
+export default function ExerciseListItem({
+  exercises,
+  handleAddToWorkout,
+  loading,
+}) {
   // const [showInfo, setShowInfo] = useState(true);
 
   return (
@@ -37,6 +41,7 @@ export default function ExerciseListItem({ exercises, handleAddToWorkout }) {
         <button
           className="AddButton"
           onClick={() => handleAddToWorkout(exercises._id)}
+          disabled={loading}
         >
           + Add
         </button>

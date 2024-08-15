@@ -5,7 +5,7 @@ module.exports = {
   show,
   addToWorkout,
   removeExerciseInWorkout,
-  //   setItemQtyInCart,
+  changeExerciseQty,
   //   checkout,
 };
 
@@ -13,7 +13,6 @@ module.exports = {
 async function show(req, res) {
   const userId = req.user._id;
   const workout = await Workout.getWorkout(userId);
-  console.log("this is a log of workout -->", workout);
   res.json(workout);
 }
 
@@ -32,11 +31,12 @@ async function removeExerciseInWorkout(req, res) {
   res.json(workout);
 }
 // // Updates an item's qty in the cart
-// async function setItemQtyInCart(req, res) {
-//   const cart = await Order.getCart(req.user._id);
-//   await cart.setItemQty(req.body.itemId, req.body.newQty);
-//   res.json(cart);
-// }
+async function changeExerciseQty(req, res) {
+  const userId = req.user._id;
+  const workout = await Workout.getWorkout(userId);
+  await workout.setExerciseQty(req.body.exerciseId, req.body.newQty);
+  res.json(workout);
+}
 
 // // Update the cart's isPaid property to true
 // async function checkout(req, res) {

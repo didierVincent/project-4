@@ -104,10 +104,10 @@ workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
   }
   // return the save() method's promise
 
-  return workout.save();
+  return await workout.save();
 };
 
-workoutSchema.methods.deleteExercise = function (exerciseId) {
+workoutSchema.methods.deleteExercise = async function (exerciseId) {
   const workout = this;
   const existingExerciseContainer = workout.exerciseList.find((e) =>
     e.exercise._id.equals(exerciseId)
@@ -120,40 +120,40 @@ workoutSchema.methods.deleteExercise = function (exerciseId) {
     existingExerciseContainer.qty * exerciseData.armsFatigue;
   workout.addedFatigue.legsFatigue -=
     existingExerciseContainer.qty * exerciseData.legsFatigue;
-  existingExerciseContainer.deleteOne();
-  return workout.save();
+  await existingExerciseContainer.deleteOne();
+  return await workout.save();
 };
 
-// // Instance method to set an item's qty in the cart
-// workoutSchema.methods.setItemQty = function (itemId, newQty) {
-//   //   // this keyword is bound to the cart (order doc)
-//   const workout = this;
-//   const exercise = workout.exerciseList.find((e) =>
-//     e.exercise._id.equals(exerciseId)
-//   );
-//   if (exercise && newQty <= 0) {
-//     // Calling deleteOne, removes the exercise subdoc from the cart.exercises array
-//     exercise.deleteOne();
-//   } else if (exercise) {
-//     // Set the new qty - positive value is assured thanks to prev if
-//     exercise.qty = newQty;
-//   }
-//   // return the save() method's promise
-//   return cart.save();
-// };
-//   // Find the line item in the cart for the menu item
-//   const lineItem = cart.lineItems.find((lineItem) =>
-//     lineItem.item._id.equals(itemId)
-//   );
-//   if (lineItem && newQty <= 0) {
-//     // Calling deleteOne, removes the lineItem subdoc from the cart.lineItems array
-//     lineItem.deleteOne();
-//   } else if (lineItem) {
-//     // Set the new qty - positive value is assured thanks to prev if
-//     lineItem.qty = newQty;
-//   }
-//   // return the save() method's promise
-//   return cart.save();
-// };
+// Instance method for inc/dec buttons
+workoutSchema.methods.setExerciseQty = async function (exerciseId, newQty) {
+  const workout = this;
+  const existingExerciseContainer = workout.exerciseList.find((e) =>
+    e._id.equals(exerciseId)
+  );
+
+  const exerciseData = existingExerciseContainer.exercise;
+
+  if (existingExerciseContainer && newQty <= 0) {
+    // Calling deleteOne, removes the exercise subdoc from the cart.exercises array
+    workout.addedFatigue.torsoFatigue -= exerciseData.torsoFatigue;
+    workout.addedFatigue.armsFatigue -= exerciseData.armsFatigue;
+    workout.addedFatigue.legsFatigue -= exerciseData.legsFatigue;
+    await existingExerciseContainer.deleteOne();
+    await workout.save();
+  } else if (existingExerciseContainer) {
+    // Set the new qty - positive value is assured thanks to prev if
+    if (existingExerciseContainer.qty < newQty) {
+      workout.addedFatigue.torsoFatigue += exerciseData.torsoFatigue;
+      workout.addedFatigue.armsFatigue += exerciseData.armsFatigue;
+      workout.addedFatigue.legsFatigue += exerciseData.legsFatigue;
+    } else if (existingExerciseContainer) {
+      workout.addedFatigue.torsoFatigue -= exerciseData.torsoFatigue;
+      workout.addedFatigue.armsFatigue -= exerciseData.armsFatigue;
+      workout.addedFatigue.legsFatigue -= exerciseData.legsFatigue;
+    }
+    existingExerciseContainer.qty = newQty;
+    await workout.save();
+  }
+};
 
 module.exports = mongoose.model("Workout", workoutSchema);

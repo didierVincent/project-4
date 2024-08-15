@@ -1,11 +1,22 @@
+import { useMemo } from "react";
 import "./Exercise.css";
 
 export default function Exercise({
   exerciseList,
   workout,
-  user,
   handleRemoveExercise,
+  handleChangeQty,
+  loading,
 }) {
+  const { initialTorsoFatigue, initialArmsFatigue, initialLegsFatigue } =
+    useMemo(
+      () => ({
+        initialTorsoFatigue: workout.addedFatigue.torsoFatigue,
+        initialArmsFatigue: workout.addedFatigue.armsFatigue,
+        initialLegsFatigue: workout.addedFatigue.legsFatigue,
+      }),
+      [workout.addedFatigue]
+    );
   return (
     <div className="Exercise">
       <div className="grid-ctr1">
@@ -13,8 +24,30 @@ export default function Exercise({
           <div className="ExerciseTitle">
             {exerciseList.exercise.name}
             <small>&nbsp;&nbsp;[x{exerciseList.qty} set]&nbsp;&nbsp;</small>
-            <button className="small-btn">-</button>
-            <button className="small-btn">+</button>
+            <button
+              className="small-btn"
+              onClick={() =>
+                handleChangeQty(exerciseList._id, exerciseList.qty - 1)
+              }
+              disabled={loading}
+            >
+              -{" "}
+            </button>
+            <button
+              className="small-btn"
+              onClick={() =>
+                handleChangeQty(exerciseList._id, exerciseList.qty + 1)
+              }
+              disabled={loading}
+            >
+              +{" "}
+            </button>
+          </div>
+
+          <div className="exercise-dmg">
+            Torso: +{exerciseList.exercise.torsoFatigue * exerciseList.qty}{" "}
+            Arms: +{exerciseList.exercise.armsFatigue * exerciseList.qty} Legs:
+            +{exerciseList.exercise.legsFatigue * exerciseList.qty}
             <button
               className="remove-btn"
               onClick={() => handleRemoveExercise(exerciseList.exercise._id)}
@@ -22,12 +55,12 @@ export default function Exercise({
               Remove
             </button>
           </div>
-          <div className="exercise-dmg">Damage</div>
-          <table>
+
+          {/* <table className="exercise-dmg">
             <tbody>
               <tr>
                 <th>Torso</th>
-                <th>+{exerciseList.exercise.torsoFatigue}</th>
+                <th></th>
               </tr>
               <tr>
                 <th>Arms</th>
@@ -38,27 +71,7 @@ export default function Exercise({
                 <th>+{exerciseList.exercise.legsFatigue}</th>
               </tr>
             </tbody>
-          </table>
-          <div className="new-fatigue-lvl">Added Fatigue</div>
-          <table>
-            <tbody>
-              <tr>
-                <th>0</th>
-                <th>--></th>
-                <th>{workout.addedFatigue.torsoFatigue}</th>
-              </tr>
-              <tr>
-                <th>0</th>
-                <th>--></th>
-                <th>{workout.addedFatigue.armsFatigue}</th>
-              </tr>
-              <tr>
-                <th>0</th>
-                <th>--></th>
-                <th>{workout.addedFatigue.armsFatigue}</th>
-              </tr>
-            </tbody>
-          </table>
+          </table> */}
         </div>
       </div>
     </div>

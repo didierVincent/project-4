@@ -13,6 +13,7 @@ export default function NewWorkoutPage({ user, setUser }) {
   const [exerciseList, setExerciseList] = useState([]);
   const [activeCat, setActiveCat] = useState("");
   const [workout, setWorkout] = useState(null);
+  const [loading, setLoading] = useState(false);
   const categoriesRef = useRef([]);
 
   useEffect(function () {
@@ -50,15 +51,30 @@ export default function NewWorkoutPage({ user, setUser }) {
   );
 
   async function handleAddToWorkout(exerciseId) {
+    setLoading(true);
     const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
     setWorkout(updatedWorkout);
+    setLoading(false);
   }
 
   async function handleRemoveExercise(exerciseId) {
+    setLoading(true);
     const updatedWorkout = await workoutsAPI.removeExerciseFromWorkout(
       exerciseId
     );
     setWorkout(updatedWorkout);
+    setLoading(false);
+  }
+
+  async function handleChangeQty(exerciseId, newQty) {
+    setLoading(true);
+    const updatedWorkout = await workoutsAPI.changeExerciseQty(
+      exerciseId,
+      newQty
+    );
+    console.log("this is updatedWorkout -> ", updatedWorkout);
+    setWorkout(updatedWorkout);
+    setLoading(false);
   }
 
   return (
@@ -76,6 +92,7 @@ export default function NewWorkoutPage({ user, setUser }) {
           </aside>
           <div>
             <ExerciseList
+              loading={loading}
               exerciseList={exerciseList}
               activeCat={activeCat}
               handleAddToWorkout={handleAddToWorkout}
@@ -83,9 +100,11 @@ export default function NewWorkoutPage({ user, setUser }) {
           </div>
           <div>
             <WorkoutDetail
+              loading={loading}
               workout={workout}
               user={user}
               handleRemoveExercise={handleRemoveExercise}
+              handleChangeQty={handleChangeQty}
             />
           </div>
         </>

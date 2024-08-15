@@ -3,7 +3,13 @@ import Exercise from "../Exercise/Exercise";
 import WorkoutFatigue from "../WorkoutFatigue/WorkoutFatigue";
 
 // Used to display the details of any order, including the cart (unpaid order)
-export default function WorkoutDetail({ workout, user, handleRemoveExercise }) {
+export default function WorkoutDetail({
+  workout,
+  user,
+  handleRemoveExercise,
+  handleChangeQty,
+  loading,
+}) {
   if (!workout) return null;
   const exerciseList = workout.exerciseList.map((exercise) => (
     <Exercise
@@ -14,6 +20,8 @@ export default function WorkoutDetail({ workout, user, handleRemoveExercise }) {
       workout={workout}
       user={user}
       handleRemoveExercise={handleRemoveExercise}
+      handleChangeQty={handleChangeQty}
+      loading={loading}
     />
   ));
 
