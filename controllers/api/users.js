@@ -36,7 +36,6 @@ async function create(req, res) {
 
 function checkToken(req, res) {
   // req.user will always be there for you when a token is sent
-  console.log("req.user", req.user);
   res.json(req.exp);
 }
 
@@ -52,6 +51,5 @@ function createJWT(user) {
 
 async function fetchData(req, res) {
   const newUserData = await User.findOne({ _id: req.user._id });
-  console.log("this is newUserData --> ", newUserData);
   res.json(newUserData);
 }
