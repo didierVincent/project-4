@@ -12,7 +12,7 @@
   grid-template-columns: 3fr 1fr;
   grid-template-areas: "en fd";
   margin-bottom: 3vmin;
-  padding: px;
+  padding: 6px;
   background-color: var(--col-3);
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
@@ -21,14 +21,19 @@
   grid-area: g2;
 }
 
-.ExerciseListItem table {
-  border: 1px solid white;
-  border-radius: 1vmin;
-  margin: 7px auto;
-  padding: 10%;
-  font-size: 100%;
+.fat-data table {
+  padding: 15px 15px;
+}
+
+.fat-data th,
+.fat-data td {
   margin: 10px auto;
   grid-area: fd;
+  font-size: 90%;
+  color: var(--col-6);
+  border: 1px solid var(--col-6);
+  width: 80px;
+  padding: 3px;
 }
 
 .ExerciseName {
@@ -48,6 +53,9 @@
   grid-area: bt;
 }
 
+.ExerciseListItem .AddButton:disabled {
+  opacity: 0.3;
+}
 /* .ExerciseListItem .info {
   grid-area: info;
 } */

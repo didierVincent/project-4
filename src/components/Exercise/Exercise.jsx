@@ -24,6 +24,8 @@ export default function Exercise({
           <div className="ExerciseTitle">
             {exerciseList.exercise.name}
             <small>&nbsp;&nbsp;[x{exerciseList.qty} set]&nbsp;&nbsp;</small>
+          </div>
+          <div className="inc-dec-btns">
             <button
               className="small-btn"
               onClick={() =>
@@ -45,33 +47,19 @@ export default function Exercise({
           </div>
 
           <div className="exercise-dmg">
-            Torso: +{exerciseList.exercise.torsoFatigue * exerciseList.qty}{" "}
-            Arms: +{exerciseList.exercise.armsFatigue * exerciseList.qty} Legs:
-            +{exerciseList.exercise.legsFatigue * exerciseList.qty}
-            <button
-              className="remove-btn"
-              onClick={() => handleRemoveExercise(exerciseList.exercise._id)}
-            >
-              Remove
-            </button>
+            Torso: +{exerciseList.exercise.torsoFatigue * exerciseList.qty}
+            <br />
+            Arms: +{exerciseList.exercise.armsFatigue * exerciseList.qty}
+            <br />
+            Legs: +{exerciseList.exercise.legsFatigue * exerciseList.qty}
+            <br />
           </div>
-
-          {/* <table className="exercise-dmg">
-            <tbody>
-              <tr>
-                <th>Torso</th>
-                <th></th>
-              </tr>
-              <tr>
-                <th>Arms</th>
-                <th>+{exerciseList.exercise.armsFatigue}</th>
-              </tr>
-              <tr>
-                <th>Legs</th>
-                <th>+{exerciseList.exercise.legsFatigue}</th>
-              </tr>
-            </tbody>
-          </table> */}
+          <button
+            className="remove-btn"
+            onClick={() => handleRemoveExercise(exerciseList.exercise._id)}
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>

@@ -1,26 +1,26 @@
 .CategoryList {
-  color: var(--col-5);
+  display: flex;
+  color: var(--col-6);
   list-style: none;
-  font-size: 1.4vw;
+  font-size: 16px;
 }
 
 .CategoryList li {
-  padding: 5px;
-  width: 250px;
+  padding: 8px;
+  width: fit-content;
   text-align: center;
   border-radius: 0.5vmin;
-  margin-bottom: 0.5vmin;
+  margin: 5px 10px 5px 10px;
   border: 1px solid var(--col-6);
 }
 
 .CategoryList li:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--col-);
-  color: var(--col-);
+  background-color: var(--col-3);
+  opacity: 0.8;
 }
 
 .CategoryList li.active {
-  color: var(--col-5);
-  background-color: var(--col-3);
+  background-color: var(--col-2);
   border: 0.1vmin solid var(--tan-3);
 }

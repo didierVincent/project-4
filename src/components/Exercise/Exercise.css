@@ -1,41 +1,54 @@
 .Exercise .grid-ctr1 {
-  display: grid;
+  display: flex;
   align-items: center;
-  justify-content: left;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "gd bt";
+  justify-content: center;
 }
 
 .Exercise .grid-ctr2 {
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4fr 1fr 2fr);
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 0.4fr;
   grid-template-areas:
-    "t ed"
-    "t ed"
-    "t ed";
+    "t idb ed"
+    "t idb rmb";
   width: 550px;
   margin-bottom: 3vmin;
   padding: 5px;
-  background-color: var(--fat-5);
+  background-color: var(--col-4);
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
   font-size: 16px;
-  grid-area: gd;
 }
 
 .Exercise .ExerciseTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  width: 450px;
+  width: fit-content;
   font-weight: bold;
   font-size: 18px;
   grid-area: t;
 }
 
-.Exercise .tables {
-  background-color: aqua;
-  grid-area: tb;
+.Exercise .inc-dec-btns {
+  display: flex;
+  text-align: center;
+  height: 20px;
+  width: 80px;
+  grid-area: idb;
+}
+
+.Exercise .small-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 20px;
+  font-size: 14px;
+  font-weight: lighter;
+  padding: 0px 15px 0 15px;
 }
 
 .Exercise table {
@@ -48,10 +61,14 @@
 }
 
 .Exercise .remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--fat-6);
   text-align: center;
   font-size: 70%;
   padding: 5px;
+  grid-area: rmb;
 }
 
 .Exercise .exercise-dmg {
@@ -62,13 +79,8 @@
   grid-area: fl;
 }
 
-.Exercise .small-btn {
-  text-align: center;
-  margin: 0 auto;
-  margin-left: 8px;
-  width: 6%;
-  font-size: 14px;
-  padding: 4px;
+.Exercise .small-btn:disabled {
+  opacity: 0.3;
 }
 
 .Exercise small {

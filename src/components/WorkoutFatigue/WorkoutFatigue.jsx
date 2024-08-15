@@ -18,7 +18,7 @@ export default function WorkoutFatigue({ user, workout, exerciseList }) {
         <tbody>
           <tr>
             <th>Torso: </th>
-            <th>work.init-> {workout.initFatigue.torsoFatigue}</th>
+            <th>workout.init-> {workout.initFatigue.torsoFatigue}</th>
             <th>--></th>
             <th>workout.added->{initialTorsoFatigue}</th>
           </tr>

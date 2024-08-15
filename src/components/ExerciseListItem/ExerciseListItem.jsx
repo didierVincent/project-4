@@ -13,7 +13,7 @@ export default function ExerciseListItem({
       <div className="grid-ctr1">
         <div className="grid-ctr2">
           <div className="ExerciseName">{exercises.name}</div>
-          <table className="FatigueData">
+          <table className="fat-data">
             <tbody>
               <tr>
                 <th>Torso</th>

@@ -9,14 +9,14 @@
   --text-light: #968c84;
   --text-dark: #615954;
   --col-1: #0d0106;
-  --col-2: #3626a7;
-  --col-3: #4e52be;
+  --col-2: #3f428a;
+  --col-3: #303255;
   --col-4: #657ed4;
   --col-5: #ff331f;
   --col-6: #fbfbff;
   --fat-0: #91c4de;
   --fat-1: #4d93d1;
-  --fat-2: #1e75b3;
+  --fat-2: #3664b9;
   --fat-3: #fdb062;
   --fat-4: #f49054;
   --fat-5: #ea7045;
@@ -27,6 +27,7 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  color: white;
 }
 
 body {
@@ -150,8 +151,8 @@ a.button {
 
 button:hover {
   cursor: pointer;
-  background-color: var(--col-6);
-  color: var(--col-);
+  background-color: var(--col-3);
+  opacity: 0.8;
 }
 
 button.btn-sm {

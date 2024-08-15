@@ -54,7 +54,7 @@ export default function WorkoutDetail({
               exerciseList={exerciseList}
             />
             {exerciseList}
-            <section className="total">
+            <div className="total">
               {workout.isDone ? (
                 <span className="right">TOTAL&nbsp;&nbsp;</span>
               ) : (
@@ -68,7 +68,7 @@ export default function WorkoutDetail({
               )}
               {/* <span>{workout.totalQty}</span> */}
               {/* <span className="right">${order.orderTotal.toFixed(2)}</span> */}
-            </section>
+            </div>
           </>
         ) : (
           <div className="hungry">Your added exercises will appear here.</div>
