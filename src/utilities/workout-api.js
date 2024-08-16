@@ -25,3 +25,8 @@ export function changeExerciseQty(exerciseId, newQty) {
     newQty,
   });
 }
+
+export function saveWorkout() {
+  // Changing data on the server, so make it a POST request
+  return sendRequest(`${BASE_URL}/workout/save`, "POST");
+}

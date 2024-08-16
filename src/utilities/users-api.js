@@ -19,3 +19,7 @@ export function checkToken() {
 export function fetchData() {
   return sendRequest(`${BASE_URL}/fetch-data`);
 }
+
+export function updateFatigue() {
+  return sendRequest(`${BASE_URL}/update-fatigue`, "POST");
+}

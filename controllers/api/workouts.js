@@ -6,7 +6,7 @@ module.exports = {
   addToWorkout,
   removeExerciseInWorkout,
   changeExerciseQty,
-  //   checkout,
+  saveWorkout,
 };
 
 // Find/Create workout for user
@@ -39,9 +39,10 @@ async function changeExerciseQty(req, res) {
 }
 
 // // Update the cart's isPaid property to true
-// async function checkout(req, res) {
-//   const cart = await Order.getCart(req.user._id);
-//   cart.isPaid = true;
-//   await cart.save();
-//   res.json(cart);
-// }
+async function saveWorkout(req, res) {
+  const userId = req.user._id;
+  const workout = await Workout.getWorkout(userId);
+  workout.isDone = true;
+  await workout.save();
+  res.json(workout);
+}

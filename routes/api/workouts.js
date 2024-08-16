@@ -10,9 +10,7 @@ router.post("/workout/exercises/:id", workoutsCtrl.addToWorkout);
 router.delete("/workout/exercises/:id", workoutsCtrl.removeExerciseInWorkout);
 
 router.put("/workout/qty", workoutsCtrl.changeExerciseQty);
-// // POST /api/workouts/cart/checkout
-// router.post("/cart/checkout", workoutsCtrl.checkout);
-// // POST /api/workouts/cart/qty
-// router.put("/cart/qty", workoutsCtrl.setItemQtyInCart);
+
+router.post("/workout/save", workoutsCtrl.saveWorkout);
 
 module.exports = router;

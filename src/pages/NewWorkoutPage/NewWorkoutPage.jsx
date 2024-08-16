@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 import * as exercisesAPI from "../../utilities/exercise-api";
 import * as musclesAPI from "../../utilities/muscle-api";
 import * as workoutsAPI from "../../utilities/workout-api";
@@ -17,6 +19,8 @@ export default function NewWorkoutPage({ user, setUser }) {
   const [activeCat, setActiveCat] = useState("");
   const [workout, setWorkout] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const categoriesRef = useRef([]);
 
   useEffect(function () {
@@ -80,6 +84,15 @@ export default function NewWorkoutPage({ user, setUser }) {
     setLoading(false);
   }
 
+  async function handleSaveWorkout() {
+    const updatedUser = await usersAPI.updateFatigue();
+    setUser(updatedUser);
+    const updatedWorkout = await workoutsAPI.saveWorkout();
+    setWorkout(updatedWorkout);
+    // add setTimeout here + display message?
+    navigate("/workouts");
+  }
+
   return (
     <main className="NewWorkoutPage">
       {workout ? (
@@ -111,6 +124,7 @@ export default function NewWorkoutPage({ user, setUser }) {
               user={user}
               handleRemoveExercise={handleRemoveExercise}
               handleChangeQty={handleChangeQty}
+              handleSaveWorkout={handleSaveWorkout}
             />
           </div>
         </>

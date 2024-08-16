@@ -1,12 +1,14 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../../models/user");
+const Workout = require("../../models/workout");
 
 module.exports = {
   create,
   login,
   checkToken,
   fetchData,
+  updateFatigue,
 };
 
 async function login(req, res) {
@@ -50,6 +52,20 @@ function createJWT(user) {
 }
 
 async function fetchData(req, res) {
-  const newUserData = await User.findOne({ _id: req.user._id });
-  res.json(newUserData);
+  const userId = req.user._id;
+  const user = await User.findOne({ _id: userId });
+  res.json(user);
+}
+
+async function updateFatigue(req, res) {
+  const userId = req.user._id;
+  const user = await User.findOne({ _id: userId });
+  const workout = await Workout.getWorkout(userId);
+
+  user.fatigue.torsoFatigue += workout.addedFatigue.torsoFatigue;
+  user.fatigue.armsFatigue += workout.addedFatigue.armsFatigue;
+  user.fatigue.legsFatigue += workout.addedFatigue.legsFatigue;
+
+  await user.save();
+  res.json(user);
 }

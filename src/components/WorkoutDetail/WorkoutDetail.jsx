@@ -9,6 +9,7 @@ export default function WorkoutDetail({
   handleRemoveExercise,
   handleChangeQty,
   loading,
+  handleSaveWorkout,
 }) {
   if (!workout) return null;
   const exerciseList = workout.exerciseList.map((exercise) => (
@@ -35,24 +36,41 @@ export default function WorkoutDetail({
 
   return (
     <div className="WorkoutDetail">
-      <div className="title">
-        {workout.isDone ? (
-          <span>
-            Workout <span className="smaller">{workout.workoutId}</span>
-          </span>
-        ) : (
-          <div>NEW Workout</div>
-        )}
-        <div>{formattedDate}</div>
+      <div className="grid">
+        <div className="title">
+          {workout.isDone ? (
+            <span>
+              Workout <span className="smaller">{workout.workoutId}</span>
+            </span>
+          ) : (
+            <div className="title-date">
+              <div className="NEW-Workout">NEW Workout</div>
+              <div className="date">{formattedDate}</div>
+            </div>
+          )}
+
+          {exerciseList.length ? (
+            <div className="fat-table">
+              <WorkoutFatigue
+                user={user}
+                workout={workout}
+                exerciseList={exerciseList}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
+
       <div>
         {exerciseList.length ? (
           <>
-            <WorkoutFatigue
-              user={user}
-              workout={workout}
-              exerciseList={exerciseList}
-            />
+            {/* <WorkoutFatigue
+                user={user}
+                workout={workout}
+                exerciseList={exerciseList}
+              /> */}
             {exerciseList}
             <div className="total">
               {workout.isDone ? (
@@ -60,7 +78,7 @@ export default function WorkoutDetail({
               ) : (
                 <button
                   className="btn-sm"
-                  // onClick={handleCheckout}
+                  onClick={handleSaveWorkout}
                   disabled={!exerciseList.length}
                 >
                   Save Workout

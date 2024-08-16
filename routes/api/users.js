@@ -15,4 +15,6 @@ router.post("/", usersCtrl.create);
 // POST /api/users/login
 router.post("/login", usersCtrl.login);
 
+router.post("/update-fatigue", usersCtrl.updateFatigue);
+
 module.exports = router;
