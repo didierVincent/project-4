@@ -43,7 +43,7 @@ export default function ExerciseListItem({
           onClick={() => handleAddToWorkout(exercises._id)}
           disabled={loading}
         >
-          + Add
+          + Add Set
         </button>
       </div>
     </div>

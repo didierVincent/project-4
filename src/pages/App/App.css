@@ -14,10 +14,13 @@
   --col-4: #657ed4;
   --col-5: #ff331f;
   --col-6: #fbfbff;
-  --fat-0: #91c4de;
-  --fat-1: #4d93d1;
-  --fat-2: #3664b9;
-  --fat-3: #fdb062;
+  --col-7: #2e2a62;
+  --col-8: #6c6e9a;
+  --col-9: #98333a;
+  --fat-0: #5ea0d5;
+  --fat-1: #4877c7;
+  --fat-2: #425bbc;
+  --fat-3: #b68d82;
   --fat-4: #f49054;
   --fat-5: #ea7045;
   --fat-6: #d73028;
@@ -117,6 +120,7 @@ label {
   font-size: 2vmin;
   display: flex;
   align-items: center;
+  color: var(--col-1);
 }
 
 input {
@@ -138,7 +142,7 @@ a.button {
   margin: 1vmin;
   padding: 1vmin;
   color: var(--white);
-  background-color: var(--col-2);
+  background-color: var(--col-7);
   font-size: 2vmin;
   font-weight: bold;
   text-decoration: none;

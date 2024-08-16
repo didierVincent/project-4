@@ -48,12 +48,14 @@ export default function ColorScale({ user, workout }) {
             <th style={{ backgroundColor: "var(--fat-6)" }}>!!!</th>
           </tr>
           <tr>
-            <td className="safe" colSpan="5">
+            <td className="safe" colSpan="3">
               Safe!
             </td>
-            <td className="risky" colSpan="2">
-              {" "}
-              Risky!
+            <td className="rest" colSpan="2">
+              Rest!
+            </td>
+            <td className="danger" colSpan="2">
+              Danger!
             </td>
           </tr>
         </tbody>

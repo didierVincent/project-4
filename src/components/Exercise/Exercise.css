@@ -15,7 +15,7 @@
   width: 550px;
   margin-bottom: 3vmin;
   padding: 5px;
-  background-color: var(--col-4);
+  background-color: var(--col-8);
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
   font-size: 16px;
@@ -64,7 +64,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--fat-6);
+  background-color: var(--col-9);
   text-align: center;
   font-size: 70%;
   padding: 5px;

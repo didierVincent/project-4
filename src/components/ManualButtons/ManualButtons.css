@@ -9,4 +9,5 @@
 
 .ManualButtons button {
   font-size: 12px;
+  background-color: var(--col-9);
 }

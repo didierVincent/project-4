@@ -6,7 +6,7 @@
 }
 
 .ExerciseListItem .grid-ctr2 {
-  width: 400px;
+  width: 375px;
   display: grid;
   place-items: center;
   grid-template-columns: 3fr 1fr;
@@ -48,8 +48,8 @@
   margin: 0 0 32px 32px;
   align-items: center;
   text-align: center;
-  width: 90%;
-  font-size: 90%;
+  width: 100%;
+  font-size: 70%;
   grid-area: bt;
 }
 

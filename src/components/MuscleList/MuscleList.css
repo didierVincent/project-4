@@ -14,6 +14,10 @@
   border: 1px solid var(--col-6);
 }
 
+.CategoryList {
+  padding: 0 auto;
+}
+
 .CategoryList li:hover:not(.active) {
   cursor: pointer;
   background-color: var(--col-3);

@@ -18,14 +18,20 @@
 }
 
 .ColorScale .safe,
-.ColorScale .risky {
-  opacity: 0.7;
+.ColorScale .rest,
+.ColorScale .danger {
+  opacity: 0.6;
   text-align: center;
-  color: var(--col-1);
-  background-color: var(--col-6);
+  color: var(--col-4);
+  background-color: rgba(0, 0, 0, 0.616);
 }
 
-.ColorScale .risky {
-  color: var(--fat-6);
+.ColorScale .rest {
+  color: var(--col-8);
+  opacity: 0.7;
+}
+
+.ColorScale .danger {
+  color: var(--col-9);
   opacity: 0.9;
 }

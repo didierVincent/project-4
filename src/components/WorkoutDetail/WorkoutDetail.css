@@ -1,4 +1,28 @@
 .WorkoutDetail .title {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 3fr 1fr;
+  grid-template-areas: "nw ft";
+}
+
+.WorkoutDetail .title-date {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  border: 1px solid white;
+  border-radius: 1vmin;
+  grid-area: nw;
+}
+.WorkoutDetail .fat-table {
+  display: flex;
+  grid-area: ft;
+}
+.WorkoutDetail .date {
+  color: var(--col-4);
+}
+
+.WorkoutDetail .title {
   text-align: center;
   font-weight: bold;
 }

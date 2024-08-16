@@ -52,7 +52,7 @@ export default function FatigueTable({ user, workout }) {
           <tr>
             <th>{user.name}'s Muscles</th>
             <th>
-              Fatigue <br /> (Levels 0-6)
+              Fatigue <br /> (Levels 0-25+)
             </th>
           </tr>
           <tr>

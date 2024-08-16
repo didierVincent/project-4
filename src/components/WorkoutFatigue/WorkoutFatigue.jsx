@@ -2,37 +2,41 @@ import "./WorkoutFatigue.css";
 import { useMemo } from "react";
 
 export default function WorkoutFatigue({ user, workout, exerciseList }) {
-  const { initialTorsoFatigue, initialArmsFatigue, initialLegsFatigue } =
-    useMemo(
-      () => ({
-        initialTorsoFatigue: workout.addedFatigue.torsoFatigue,
-        initialArmsFatigue: workout.addedFatigue.armsFatigue,
-        initialLegsFatigue: workout.addedFatigue.legsFatigue,
-      }),
-      [workout.addedFatigue]
-    );
+  const { totalTorsoFatigue, totalArmsFatigue, totalLegsFatigue } = useMemo(
+    () => ({
+      totalTorsoFatigue:
+        workout.initFatigue.torsoFatigue + workout.addedFatigue.torsoFatigue,
+      totalArmsFatigue:
+        workout.initFatigue.armsFatigue + workout.addedFatigue.armsFatigue,
+      totalLegsFatigue:
+        workout.initFatigue.legsFatigue + workout.addedFatigue.legsFatigue,
+    }),
+    [workout.addedFatigue]
+  );
   return (
     <div className="WorkoutFatigue">
-      <div className="new-fatigue-lvl">Workout Fatigue!</div>
       <table>
         <tbody>
           <tr>
+            <th colSpan={4}> Workout Fatigue!</th>
+          </tr>
+          <tr>
             <th>Torso: </th>
-            <th>workout.init-> {workout.initFatigue.torsoFatigue}</th>
+            <th>{workout.initFatigue.torsoFatigue}</th>
             <th>--></th>
-            <th>workout.added->{initialTorsoFatigue}</th>
+            <th>{totalTorsoFatigue}</th>
           </tr>
           <tr>
             <th>Arms: </th>
-            <th>{user.fatigue.armsFatigue}</th>
+            <th>{workout.initFatigue.armsFatigue}</th>
             <th>--></th>
-            <th>{initialArmsFatigue}</th>
+            <th>{totalArmsFatigue}</th>
           </tr>
           <tr>
             <th>Legs:</th>
-            <th> {user.fatigue.legsFatigue}</th>
+            <th> {workout.initFatigue.legsFatigue}</th>
             <th>--></th>
-            <th>{initialLegsFatigue}</th>
+            <th>{totalLegsFatigue}</th>
           </tr>
         </tbody>
       </table>

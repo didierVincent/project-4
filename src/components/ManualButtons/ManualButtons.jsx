@@ -6,7 +6,9 @@ export default function ManualButtons() {
       <hr></hr>
       <button className="rest-day">+ Add Rest Day</button>
       <button className="reset-all">Reset All !!!</button>
-      <p>*Rest days decrease all muscle fatigue by 2 points</p>
+      <p>
+        <strong>*Rest days decrease all muscle fatigue by 2</strong>
+      </p>
     </div>
   );
 }
