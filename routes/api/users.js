@@ -15,6 +15,9 @@ router.post("/", usersCtrl.create);
 // POST /api/users/login
 router.post("/login", usersCtrl.login);
 
+// created Routes
 router.post("/update-fatigue", usersCtrl.updateFatigue);
+router.post("/reset-fatigue", usersCtrl.resetFatigue);
+router.post("/add-rest-day", usersCtrl.addRestDay);
 
 module.exports = router;

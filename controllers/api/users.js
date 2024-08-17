@@ -9,6 +9,8 @@ module.exports = {
   checkToken,
   fetchData,
   updateFatigue,
+  resetFatigue,
+  addRestDay,
 };
 
 async function login(req, res) {
@@ -51,6 +53,13 @@ function createJWT(user) {
   );
 }
 
+const adjustFatigue = (fatigue) => {
+  if (fatigue >= 4) {
+    return fatigue - 4;
+  }
+  return 0;
+};
+
 async function fetchData(req, res) {
   const userId = req.user._id;
   const user = await User.findOne({ _id: userId });
@@ -66,6 +75,26 @@ async function updateFatigue(req, res) {
   user.fatigue.armsFatigue += workout.addedFatigue.armsFatigue;
   user.fatigue.legsFatigue += workout.addedFatigue.legsFatigue;
 
+  await user.save();
+  res.json(user);
+}
+
+async function resetFatigue(req, res) {
+  const userId = req.user._id;
+  const user = await User.findOne({ _id: userId });
+  user.fatigue.torsoFatigue = 0;
+  user.fatigue.armsFatigue = 0;
+  user.fatigue.legsFatigue = 0;
+  await user.save();
+  res.json(user);
+}
+
+async function addRestDay(req, res) {
+  const userId = req.user._id;
+  const user = await User.findOne({ _id: userId });
+  user.fatigue.torsoFatigue = adjustFatigue(user.fatigue.torsoFatigue);
+  user.fatigue.armsFatigue = adjustFatigue(user.fatigue.armsFatigue);
+  user.fatigue.legsFatigue = adjustFatigue(user.fatigue.legsFatigue);
   await user.save();
   res.json(user);
 }

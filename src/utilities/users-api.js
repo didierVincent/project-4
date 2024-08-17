@@ -15,11 +15,18 @@ export function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }
 
-// created this to try retrieve new user data... didnt work
 export function fetchData() {
   return sendRequest(`${BASE_URL}/fetch-data`);
 }
 
 export function updateFatigue() {
   return sendRequest(`${BASE_URL}/update-fatigue`, "POST");
+}
+
+export function resetFatigue() {
+  return sendRequest(`${BASE_URL}/reset-fatigue`, "POST");
+}
+
+export function addRestDay() {
+  return sendRequest(`${BASE_URL}/add-rest-day`, "POST");
 }

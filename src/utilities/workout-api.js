@@ -19,6 +19,10 @@ export function removeExerciseFromWorkout(exerciseId) {
   });
 }
 
+export function resetWorkout() {
+  return sendRequest(`${BASE_URL}/workout/delete`, "DELETE");
+}
+
 export function changeExerciseQty(exerciseId, newQty) {
   return sendRequest(`${BASE_URL}/workout/qty`, "PUT", {
     exerciseId,
@@ -29,4 +33,13 @@ export function changeExerciseQty(exerciseId, newQty) {
 export function saveWorkout() {
   // Changing data on the server, so make it a POST request
   return sendRequest(`${BASE_URL}/workout/save`, "POST");
+}
+
+export function getWorkoutHistory() {
+  return sendRequest(`${BASE_URL}/workout/saved-workouts`);
+}
+
+export function addRestDay() {
+  // Changing data on the server, so make it a POST request
+  return sendRequest(`${BASE_URL}/workout/add-rest-day`, "POST");
 }

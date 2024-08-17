@@ -7,6 +7,17 @@ module.exports = {
   removeExerciseInWorkout,
   changeExerciseQty,
   saveWorkout,
+  getWorkoutHistory,
+  resetWorkout,
+  addRestDay,
+};
+
+// Helper function
+const adjustFatigue = (fatigue) => {
+  if (fatigue >= 4) {
+    return fatigue - 4;
+  }
+  return 0;
 };
 
 // Find/Create workout for user
@@ -43,6 +54,34 @@ async function saveWorkout(req, res) {
   const userId = req.user._id;
   const workout = await Workout.getWorkout(userId);
   workout.isDone = true;
+  await workout.save();
+  res.json(workout);
+}
+
+async function getWorkoutHistory(req, res) {
+  const userId = req.user._id;
+  const workout = await Workout.find({ user: userId, isDone: true });
+  res.json(workout);
+}
+
+async function resetWorkout(req, res) {
+  const userId = req.user._id;
+  const workout = await Workout.deleteOne({ user: userId, isDone: false });
+  res.json(workout);
+}
+
+async function addRestDay(req, res) {
+  const userId = req.user._id;
+  const workout = await Workout.findOne({ user: userId, isDone: false });
+  workout.initFatigue.torsoFatigue = adjustFatigue(
+    workout.initFatigue.torsoFatigue
+  );
+  workout.initFatigue.armsFatigue = adjustFatigue(
+    workout.initFatigue.armsFatigue
+  );
+  workout.initFatigue.legsFatigue = adjustFatigue(
+    workout.initFatigue.legsFatigue
+  );
   await workout.save();
   res.json(workout);
 }

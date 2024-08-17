@@ -39,28 +39,19 @@ const workoutSchema = new Schema(
   }
 );
 
-// workoutSchema.virtual("orderTotal").get(function () {
-//   return this.lineItems.reduce((total, item) => total + item.extPrice, 0);
-// });
-
-// workoutSchema.virtual("orderQty").get(function () {
-//   return this.lineItems.reduce((total, item) => total + item.qty, 0);
-// });
-
-// workoutSchema.virtual("orderId").get(function () {
-//   return this.id.slice(-6).toUpperCase();
-// });
-
 workoutSchema.statics.getWorkout = async function (userId) {
   const workout = this;
 
   const User = mongoose.model("User");
   const user = await User.findById(userId);
 
-  const existingWorkout = await this.findOne({ user: userId, isDone: false });
+  const existingWorkout = await workout.findOne({
+    user: userId,
+    isDone: false,
+  });
 
   if (existingWorkout) {
-    // Return the existing workout without any updates
+    // Return the existing workout without any updates, if no doc, create with user.fatigue data
     return existingWorkout;
   } else {
     return workout.findOneAndUpdate(
@@ -74,25 +65,24 @@ workoutSchema.statics.getWorkout = async function (userId) {
   }
 };
 
-// Instance method for adding an item to a cart (unpaid order)
+// Instance method for adding an exercise to a workout (unsaved workout)
 workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
-  // 'this' keyword is bound to the cart (order doc)
+  // 'this' keyword is bound to the workout doc
   const workout = this;
-  // Check if the item already exists in the workout
-  const existingExerciseContainer = workout.exerciseList.find((exerContainer) =>
-    exerContainer.exercise._id.equals(exerciseId)
+  // Check if the exercise already exists in the workout
+  const existingExerciseContainer = workout.exerciseList.find((e) =>
+    e.exercise._id.equals(exerciseId)
   );
 
   if (existingExerciseContainer) {
-    // It already exists, so increase the qty
+    // It already exists, so increase the qty and update fatigue +1
     existingExerciseContainer.qty += 1;
     const existingExercise = existingExerciseContainer.exercise;
     workout.addedFatigue.torsoFatigue += existingExercise.torsoFatigue;
     workout.addedFatigue.armsFatigue += existingExercise.armsFatigue;
     workout.addedFatigue.legsFatigue += existingExercise.legsFatigue;
   } else {
-    // Get the item from the "catalog"
-    // Note how the mongoose.model method behaves as a getter when passed one arg vs. two
+    // Get the exercise from the "catalog" and update fatigue +1
     const Exercise = mongoose.model("Exercise");
     const exercise = await Exercise.findById(exerciseId);
 
@@ -102,8 +92,6 @@ workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
 
     workout.exerciseList.push({ exercise });
   }
-  // return the save() method's promise
-
   return await workout.save();
 };
 
@@ -112,6 +100,7 @@ workoutSchema.methods.deleteExercise = async function (exerciseId) {
   const existingExerciseContainer = workout.exerciseList.find((e) =>
     e.exercise._id.equals(exerciseId)
   );
+  // exercises are added to workouts but wrapped inside an exercise container
   const exerciseData = existingExerciseContainer.exercise;
 
   workout.addedFatigue.torsoFatigue -=
@@ -134,14 +123,14 @@ workoutSchema.methods.setExerciseQty = async function (exerciseId, newQty) {
   const exerciseData = existingExerciseContainer.exercise;
 
   if (existingExerciseContainer && newQty <= 0) {
-    // Calling deleteOne, removes the exercise subdoc from the cart.exercises array
+    // Calling deleteOne, removes the exercise subdoc from the order.exerciseList array
     workout.addedFatigue.torsoFatigue -= exerciseData.torsoFatigue;
     workout.addedFatigue.armsFatigue -= exerciseData.armsFatigue;
     workout.addedFatigue.legsFatigue -= exerciseData.legsFatigue;
     await existingExerciseContainer.deleteOne();
     await workout.save();
   } else if (existingExerciseContainer) {
-    // Set the new qty - positive value is assured thanks to prev if
+    // Set the new qty and fatigue data
     if (existingExerciseContainer.qty < newQty) {
       workout.addedFatigue.torsoFatigue += exerciseData.torsoFatigue;
       workout.addedFatigue.armsFatigue += exerciseData.armsFatigue;
