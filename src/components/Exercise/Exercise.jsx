@@ -1,22 +1,11 @@
-import { useMemo } from "react";
 import "./Exercise.css";
 
 export default function Exercise({
   exerciseList,
-  workout,
   handleRemoveExercise,
   handleChangeQty,
-  loading,
+  btnLoading,
 }) {
-  const { initialTorsoFatigue, initialArmsFatigue, initialLegsFatigue } =
-    useMemo(
-      () => ({
-        initialTorsoFatigue: workout.addedFatigue.torsoFatigue,
-        initialArmsFatigue: workout.addedFatigue.armsFatigue,
-        initialLegsFatigue: workout.addedFatigue.legsFatigue,
-      }),
-      [workout.addedFatigue]
-    );
   return (
     <div className="Exercise">
       <div className="grid-ctr1">
@@ -31,7 +20,7 @@ export default function Exercise({
               onClick={() =>
                 handleChangeQty(exerciseList._id, exerciseList.qty - 1)
               }
-              disabled={loading}
+              disabled={btnLoading}
             >
               -{" "}
             </button>
@@ -40,7 +29,7 @@ export default function Exercise({
               onClick={() =>
                 handleChangeQty(exerciseList._id, exerciseList.qty + 1)
               }
-              disabled={loading}
+              disabled={btnLoading}
             >
               +{" "}
             </button>
@@ -57,6 +46,7 @@ export default function Exercise({
           <button
             className="remove-btn"
             onClick={() => handleRemoveExercise(exerciseList.exercise._id)}
+            disabled={btnLoading}
           >
             Remove
           </button>

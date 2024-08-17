@@ -5,7 +5,7 @@ export default function ExerciseList({
   exerciseList,
   activeCat,
   handleAddToWorkout,
-  loading,
+  btnLoading,
 }) {
   // display only exercises with selected muscle category
   const catExercises = exerciseList.filter((exercise) =>
@@ -26,7 +26,7 @@ export default function ExerciseList({
 
   const exercises = catExercises.map((exercise) => (
     <ExerciseListItem
-      loading={loading}
+      btnLoading={btnLoading}
       key={exercise._id}
       exercises={exercise}
       handleAddToWorkout={handleAddToWorkout}

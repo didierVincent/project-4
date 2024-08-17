@@ -8,7 +8,7 @@ export default function WorkoutDetail({
   user,
   handleRemoveExercise,
   handleChangeQty,
-  loading,
+  btnLoading,
   handleSaveWorkout,
 }) {
   if (!workout) return null;
@@ -16,13 +16,12 @@ export default function WorkoutDetail({
     <Exercise
       exerciseList={exercise}
       isDone={workout.isDone}
-      // handleChangeQty={handleChangeQty}
       key={exercise._id}
       workout={workout}
       user={user}
       handleRemoveExercise={handleRemoveExercise}
       handleChangeQty={handleChangeQty}
-      loading={loading}
+      btnLoading={btnLoading}
     />
   ));
 
@@ -44,7 +43,9 @@ export default function WorkoutDetail({
             </span>
           ) : (
             <div className="title-date">
-              <div className="NEW-Workout">NEW Workout</div>
+              <div className="NEW-Workout">
+                Workout #{workout._id.slice(-3).toUpperCase()}
+              </div>
               <div className="date">{formattedDate}</div>
             </div>
           )}
@@ -89,7 +90,9 @@ export default function WorkoutDetail({
             </div>
           </>
         ) : (
-          <div className="hungry">Your added exercises will appear here.</div>
+          <div className="no-exercises">
+            Added exercises will be listed here.
+          </div>
         )}
       </div>
     </div>

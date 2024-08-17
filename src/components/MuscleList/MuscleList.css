@@ -1,5 +1,6 @@
 .CategoryList {
   display: flex;
+  justify-content: center;
   color: var(--col-6);
   list-style: none;
   font-size: 16px;
@@ -7,10 +8,10 @@
 
 .CategoryList li {
   padding: 8px;
-  width: fit-content;
+  width: 120px;
   text-align: center;
   border-radius: 0.5vmin;
-  margin: 5px 10px 5px 10px;
+  margin: 10px 10px 10px 10px;
   border: 1px solid var(--col-6);
 }
 
@@ -20,11 +21,11 @@
 
 .CategoryList li:hover:not(.active) {
   cursor: pointer;
-  background-color: var(--col-3);
+  background-color: var(--col-9);
   opacity: 0.8;
 }
 
 .CategoryList li.active {
-  background-color: var(--col-2);
+  background-color: var(--col-9);
   border: 0.1vmin solid var(--tan-3);
 }

@@ -4,7 +4,7 @@ import "./ExerciseListItem.css";
 export default function ExerciseListItem({
   exercises,
   handleAddToWorkout,
-  loading,
+  btnLoading,
 }) {
   // const [showInfo, setShowInfo] = useState(true);
 
@@ -41,7 +41,7 @@ export default function ExerciseListItem({
         <button
           className="AddButton"
           onClick={() => handleAddToWorkout(exercises._id)}
-          disabled={loading}
+          disabled={btnLoading}
         >
           + Add Set
         </button>

@@ -1,6 +1,6 @@
-import "./SVGBodyModel.css";
+import "./SVGBodyHistory.css";
 
-export default function SVGBodyModel({ workout }) {
+export default function SVGBodyHistory({ user }) {
   const backgroundColorScale = {
     0: "var(--fat-0)",
     1: "var(--fat-0)",
@@ -34,25 +34,22 @@ export default function SVGBodyModel({ workout }) {
     29: "var(--fat-5)",
   };
 
-  const torso =
-    workout.initFatigue.torsoFatigue + workout.addedFatigue.torsoFatigue;
-  const arms =
-    workout.initFatigue.armsFatigue + workout.addedFatigue.armsFatigue;
-  const legs =
-    workout.initFatigue.legsFatigue + workout.addedFatigue.legsFatigue;
+  const torso = user.fatigue.torsoFatigue;
+  const arms = user.fatigue.armsFatigue;
+  const legs = user.fatigue.legsFatigue;
 
   const torsoFat = backgroundColorScale[torso] || "var(--fat-6)";
   const armsFat = backgroundColorScale[arms] || "var(--fat-6)";
   const legsFat = backgroundColorScale[legs] || "var(--fat-6)";
 
   return (
-    <div className="SVGBodyModel">
+    <div className="SVGBodyHistory">
       <div className="svg-ctr">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 850 850"
-          width="400"
-          height="300"
+          width="600"
+          height="600"
           preserveAspectRatio="xMidYMid meet"
         >
           <path

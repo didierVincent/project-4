@@ -12,10 +12,10 @@
   grid-template-areas:
     "t idb ed"
     "t idb rmb";
-  width: 550px;
+  width: 500px;
   margin-bottom: 3vmin;
   padding: 5px;
-  background-color: var(--col-8);
+  background-color: var(--fat-2);
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
   font-size: 16px;
@@ -85,4 +85,8 @@
 
 .Exercise small {
   line-height: 150%;
+}
+
+.Exercise button:disabled {
+  cursor: not-allowed;
 }

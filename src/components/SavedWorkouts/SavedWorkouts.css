@@ -1,0 +1,15 @@
+.SavedWorkouts .split-cell {
+  display: flex; /* Use flexbox to arrange columns horizontally */
+}
+
+.SavedWorkouts .column {
+  flex: 1;
+  border: 1px solid black; /* Optional: Adds borders to each column for clarity */
+  padding: 8px; /* Adds some padding */
+  box-sizing: border-box; /* Ensures padding and border are included in the element’s total width */
+  width: 135px;
+}
+
+.SavedWorkouts .split-cell .column + .column {
+  border-left: 0; /* Removes the border between columns */
+}

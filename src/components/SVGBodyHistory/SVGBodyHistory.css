@@ -1,0 +1,16 @@
+.SVGBodyModel svg {
+  /* width: 100%;
+  height: auto;
+  max-width: 200px;  */
+}
+
+.SVGBodyHistory .svg-ctr {
+  display: grid;
+  align-items: center;
+  margin-top: 32px;
+  margin-right: 32px;
+  border: 1px solid white;
+  border-radius: 1vmin;
+  overflow: visible;
+  grid-area: svg;
+}

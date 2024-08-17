@@ -12,6 +12,7 @@
   padding: 15px;
   border: 1px solid white;
   border-radius: 1vmin;
+  width: 300px;
   grid-area: nw;
 }
 .WorkoutDetail .fat-table {
@@ -23,6 +24,8 @@
 }
 
 .WorkoutDetail .title {
+  display: flex;
+  justify-content: center;
   text-align: center;
   font-weight: bold;
 }
@@ -34,8 +37,21 @@
   margin-right: 10%;
 }
 
+.WorkoutDetail .total button {
+  justify-content: center;
+  width: 150px;
+  font-size: 16px;
+  background-color: var(--col-3);
+}
+
 .WorkoutDetail button {
   display: flex;
   width: fit-content;
   font-size: 16px;
+}
+
+.WorkoutDetail .no-exercises {
+  margin: 25px;
+  text-align: center;
+  font-size: 22px;
 }

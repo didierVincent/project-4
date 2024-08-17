@@ -1,4 +1,11 @@
 .Navbar {
+  display: flex;
   padding: 5px;
   color: var(--col-5);
+}
+
+.Navbar .app-title {
+  color: var(--col-9);
+  font-size: 250%;
+  margin-left: 170px;
 }

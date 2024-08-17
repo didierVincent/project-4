@@ -1,17 +1,17 @@
 .ExerciseListItem .grid-ctr1 {
   display: grid;
   place-items: center;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 1fr;
   grid-template-areas: "g2 bt";
 }
 
 .ExerciseListItem .grid-ctr2 {
-  width: 375px;
+  width: fit-content;
   display: grid;
   place-items: center;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-template-areas: "en fd";
-  margin-bottom: 3vmin;
+  margin-bottom: 2vmin;
   padding: 6px;
   background-color: var(--col-3);
   border: 0.1vmin solid var(--tan-3);
@@ -45,20 +45,18 @@
 }
 
 .ExerciseListItem .AddButton {
-  margin: 0 0 32px 32px;
   align-items: center;
   text-align: center;
-  width: 100%;
+  margin-bottom: 20px;
+  margin-right: 0px;
   font-size: 70%;
+  background-color: var(--col-9);
   grid-area: bt;
 }
 
 .ExerciseListItem .AddButton:disabled {
   opacity: 0.3;
 }
-/* .ExerciseListItem .info {
-  grid-area: info;
-} */
 
 .switch {
   position: relative;
