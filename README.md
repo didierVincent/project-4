@@ -4,10 +4,10 @@
 
 ## Description
 
-**Track your workout activity, and we'll show you if you're at any real injury risk.**
+**Track your workout activity, and we'll show you if you're at any real injury risk!**
 
 <BR>
-Data visualisation app that lets a user create and save workouts while displaying a body model representing fatigue and the injury risk potential.
+Data visualisation app that lets users create workouts with a body model representing muscle fatigue levels and the injury risk potential.
 
 ## Getting Started!
 
