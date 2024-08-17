@@ -34,13 +34,27 @@ Trello Link: https://trello.com/b/z6gwByEL/project-4-gym-fatigue-tracking-app
 
 ## Technology Used
 
-MERN Stack:
+### MERN Stack:
+
 MongoDB, Express, React, Node
 
-<BR> (Created in Visual Studio Code)
+#### Other technology implemented:
+
+- JWT Authentication
+- Mongoose for MongoDB
+- Inkscape for SVG creation/editing
+  <BR> (Created in Visual Studio Code)
 
 ## Next Steps
 
+### For Users
+
+- Add functionality so user fatigue levels reduce over time each day!
+- Expand and create more specific muscle categories and more available exercises
+- Introduce other types of fatigue relevant for injury prevention, such as joint fatigue and CNS fatigue.
+- Add images/icons for different workouts
+
+### Technical
+
 - Refactor for more client-side routing/rendering for responsiveness.
-- Add functionality so user fatigue levels reduce each real day!
-- Create compatible Mobile Browser App
+- Refactor state management and reduce unnecessary AJAX requests for responsiveness
