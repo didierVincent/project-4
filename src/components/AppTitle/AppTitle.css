@@ -1,0 +1,5 @@
+.AppTitle .app-title {
+  color: var(--col-9);
+  font-size: 250%;
+  text-align: center;
+}

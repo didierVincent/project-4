@@ -88,9 +88,9 @@ code {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: var(--tan-1);
-  color: var(--text-dark);
-  border: 0.1vmin solid var(--tan-3);
+  background-color: var(--col-4);
+  color: white;
+  border: 0.1vmin solid var(--col-4);
   border-radius: 1vmin;
   padding: 0.6vmin;
   text-align: center;
@@ -98,10 +98,12 @@ code {
 }
 
 .form-container {
-  padding: 3vmin;
-  background-color: var(--tan-1);
-  border: 0.1vmin solid var(--tan-3);
+  padding: 4vmin;
+  margin-left: 20%;
+  background-color: var(--col-9);
+  border: 0.1vmin solid white;
   border-radius: 1vmin;
+  width: 800px;
 }
 
 p.error-message {
@@ -120,7 +122,7 @@ label {
   font-size: 2vmin;
   display: flex;
   align-items: center;
-  color: var(--col-1);
+  color: white;
 }
 
 input {
@@ -129,6 +131,8 @@ input {
   border: 0.1vmin solid var(--tan-3);
   border-radius: 0.5vmin;
   color: var(--col-1);
+  background-color: #0d0106;
+  color: white;
   background-image: none !important; /* prevent lastpass */
   outline: none;
 }
@@ -142,7 +146,7 @@ a.button {
   margin: 1vmin;
   padding: 1vmin;
   color: var(--white);
-  background-color: var(--col-7);
+  background-color: var(--fat-2);
   font-size: 2vmin;
   font-weight: bold;
   text-decoration: none;
@@ -155,7 +159,6 @@ a.button {
 
 button:hover {
   cursor: pointer;
-  background-color: var(--col-3);
   opacity: 0.8;
 }
 
@@ -172,7 +175,7 @@ button.btn-xs {
 button:disabled,
 form:invalid button[type="submit"] {
   cursor: not-allowed;
-  background-color: var(--tan-4);
+  background-color: #595961;
 }
 
 button[type="submit"] {
@@ -184,5 +187,5 @@ a:hover {
   text-decoration: none;
   padding: 1px;
   border-radius: 0.5vmin;
-  background-color: var(--col-5);
+  background-color: var(--col-9);
 }

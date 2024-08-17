@@ -1,0 +1,28 @@
+.AuthPage .title {
+  margin: 20px;
+  margin-left: 10%;
+}
+
+.AuthPage h2 {
+  padding-top: 20px;
+  color: var(--fat-1);
+}
+
+.AuthPage .btn-ctr {
+  padding: 20px;
+  margin-left: 10%;
+}
+
+.AuthPage .signup-btn {
+  background-color: var(--fat-2);
+  width: 150px;
+}
+
+.AuthPage .svg-demo {
+  margin-left: 300px;
+}
+
+.AuthPage .make-flex {
+  display: flex;
+  padding: 20px;
+}
