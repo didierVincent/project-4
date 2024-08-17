@@ -1,6 +1,6 @@
 # Gym Fatigue Tracker! (Fatigue Data Visualisation App)
 
-**Unit 4 Project - MERN Full-stack Application MongoDB/Node/Express/React**
+**Unit 4 Project - MERN Full-stack Application (MongoDB/Node/Express/React)**
 
 ## Description
 
