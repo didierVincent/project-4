@@ -4,11 +4,10 @@
 
 ## Description
 
-**This is an app for gym goers (that do weight training) that tracks your muscle fatigue each time you workout to help you prevent overtraining risks and injuries.**
+**Track your workout activity, and we'll show you if you're at any real injury risk.**
 
 <BR>
-Easy user-friendly app built for anyone to calculate costs for anything.
-For personal home projects, for your best friend's backyard, or more comprehensive lists for contractors looking to make quick quotes for clients.
+Data visualisation app that lets a user create and save workouts while displaying a body model representing fatigue and the injury risk potential.
 
 ## Getting Started!
 
