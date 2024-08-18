@@ -1,6 +1,6 @@
 # Gym Fatigue Tracker! (Fatigue Data Visualisation App)
 
-**Unit 4 Project - MERN Full-stack Application (MongoDB/Node/Express/React)**
+**Unit 4 Project - MERN Full-stack Application (MongoDB/Express/React/Node)**
 
 ## Description
 
@@ -54,7 +54,8 @@ MongoDB, Express, React, Node
 - Introduce other types of fatigue relevant for injury prevention, such as joint fatigue and CNS fatigue.
 - Add images/icons for different workouts
 
-### Technical
+### Technical Additions
 
 - Refactor for more client-side routing/rendering for responsiveness.
-- Refactor state management and reduce unnecessary AJAX requests for responsiveness
+- Refactor state management and reduce unnecessary AJAX requests for responsiveness.
+- Refactor CSS to make it responsive on all devices
