@@ -1,8 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-
-import * as exercisesAPI from "../../utilities/exercise-api";
-import * as musclesAPI from "../../utilities/muscle-api";
 import * as workoutsAPI from "../../utilities/workout-api";
 import * as usersAPI from "../../utilities/users-api";
 import "./NewWorkoutPage.css";
@@ -25,50 +21,6 @@ export default function NewWorkoutPage({
   btnLoading,
   setBtnLoading,
 }) {
-  const [exerciseList, setExerciseList] = useState([]);
-  const [activeCat, setActiveCat] = useState("");
-  const navigate = useNavigate();
-
-  const categoriesRef = useRef([]);
-
-  useEffect(function () {
-    async function getExercises() {
-      setLoading(true);
-      const exercises = await exercisesAPI.getAll();
-      const muscleCats = await musclesAPI.getAll();
-      categoriesRef.current = [
-        ...new Set(muscleCats.map((muscle) => muscle.name)),
-      ];
-      setActiveCat(categoriesRef.current[0]);
-      setExerciseList(exercises);
-    }
-    getExercises();
-
-    async function getWorkout() {
-      const workout = await workoutsAPI.getWorkout();
-      setWorkout(workout);
-      setActiveWorkout(true);
-      setLoading(false);
-    }
-    getWorkout();
-  }, []);
-
-  useEffect(
-    function () {
-      async function fetchUserData() {
-        const updatedUser = await usersAPI.fetchData();
-        if (
-          JSON.stringify(updatedUser.fatigue) !== JSON.stringify(user.fatigue)
-        ) {
-          setUser(updatedUser);
-          setLoading(false);
-        }
-      }
-      fetchUserData();
-    },
-    [workout]
-  );
-
   async function handleAddToWorkout(exerciseId) {
     setBtnLoading(true);
     const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import * as exercisesAPI from "../../utilities/exercise-api";
@@ -11,6 +11,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import NewWorkoutPage from "../NewWorkoutPage/NewWorkoutPage";
 import WorkoutHistoryPage from "../WorkoutHistoryPage/WorkoutHistoryPage";
 import AppTitle from "../../components/AppTitle/AppTitle";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -18,6 +19,50 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [activeWorkout, setActiveWorkout] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
+
+  const [exerciseList, setExerciseList] = useState([]);
+  const [activeCat, setActiveCat] = useState("");
+  const navigate = useNavigate();
+
+  const categoriesRef = useRef([]);
+
+  useEffect(function () {
+    async function getExercises() {
+      setLoading(true);
+      const exercises = await exercisesAPI.getAll();
+      const muscleCats = await musclesAPI.getAll();
+      categoriesRef.current = [
+        ...new Set(muscleCats.map((muscle) => muscle.name)),
+      ];
+      setActiveCat(categoriesRef.current[0]);
+      setExerciseList(exercises);
+    }
+    getExercises();
+
+    async function getWorkout() {
+      const workout = await workoutsAPI.getWorkout();
+      setWorkout(workout);
+      setActiveWorkout(true);
+      setLoading(false);
+    }
+    getWorkout();
+  }, []);
+
+  useEffect(
+    function () {
+      async function fetchUserData() {
+        const updatedUser = await usersAPI.fetchData();
+        if (
+          JSON.stringify(updatedUser.fatigue) !== JSON.stringify(user.fatigue)
+        ) {
+          setUser(updatedUser);
+          setLoading(false);
+        }
+      }
+      fetchUserData();
+    },
+    [workout]
+  );
 
   return (
     <main className="App">
