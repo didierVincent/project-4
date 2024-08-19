@@ -64,6 +64,64 @@ export default function App() {
     [workout]
   );
 
+  async function handleAddToWorkout(exerciseId) {
+    setBtnLoading(true);
+    const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
+    setWorkout(updatedWorkout);
+    setBtnLoading(false);
+  }
+
+  async function handleRemoveExercise(exerciseId) {
+    setBtnLoading(true);
+    const updatedWorkout = await workoutsAPI.removeExerciseFromWorkout(
+      exerciseId
+    );
+    setWorkout(updatedWorkout);
+    setBtnLoading(false);
+  }
+
+  async function handleChangeQty(exerciseId, newQty) {
+    setBtnLoading(true);
+    const updatedWorkout = await workoutsAPI.changeExerciseQty(
+      exerciseId,
+      newQty
+    );
+    setWorkout(updatedWorkout);
+    setBtnLoading(false);
+  }
+
+  async function handleSaveWorkout() {
+    setBtnLoading(true);
+    const updatedUser = await usersAPI.updateFatigue();
+    setUser(updatedUser);
+    const updatedWorkout = await workoutsAPI.saveWorkout();
+    setWorkout(updatedWorkout);
+    // add setTimeout here + display message?
+    setBtnLoading(false);
+    setLoading(true);
+    setActiveWorkout(false);
+    navigate("/workouts");
+  }
+
+  async function handleResetFatigueAndWorkout() {
+    setLoading(true);
+    const updatedUser = await usersAPI.resetFatigue();
+    setUser(updatedUser);
+    await workoutsAPI.resetWorkout();
+    const updatedWorkout = await workoutsAPI.getWorkout();
+    setWorkout(updatedWorkout);
+    setLoading(false);
+  }
+
+  async function handleAddRestDay() {
+    setBtnLoading(true);
+    const updatedUser = await usersAPI.addRestDay();
+    setUser(updatedUser);
+    const updatedWorkout = await workoutsAPI.addRestDay();
+    setWorkout(updatedWorkout);
+    setBtnLoading(false);
+  }
+
   return (
     <main className="App">
       {user ? (
