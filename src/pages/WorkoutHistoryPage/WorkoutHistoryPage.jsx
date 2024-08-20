@@ -22,16 +22,6 @@ export default function WorkoutHistoryPage({
   btnLoading,
   setBtnLoading,
 }) {
-  useEffect(function () {
-    async function getWorkoutHistory() {
-      setLoading(true);
-      const savedWorkouts = await workoutsAPI.getWorkoutHistory();
-      setWorkout(savedWorkouts);
-      setLoading(false);
-    }
-    getWorkoutHistory();
-  }, []);
-
   if (!loading) {
     const savedWorkouts = workout.map((pastWorkouts, counter) => (
       <SavedWorkouts counter={counter + 1} pastWorkouts={pastWorkouts} />

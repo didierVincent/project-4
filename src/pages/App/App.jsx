@@ -64,6 +64,16 @@ export default function App() {
     [workout]
   );
 
+  useEffect(function () {
+    async function getWorkoutHistory() {
+      setLoading(true);
+      const savedWorkouts = await workoutsAPI.getWorkoutHistory();
+      setWorkout(savedWorkouts);
+      setLoading(false);
+    }
+    getWorkoutHistory();
+  }, []);
+
   async function handleAddToWorkout(exerciseId) {
     setBtnLoading(true);
     const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
