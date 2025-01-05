@@ -1,26 +1,51 @@
 import "./WorkoutDetail.css";
 import Exercise from "../Exercise/Exercise";
 import WorkoutFatigue from "../WorkoutFatigue/WorkoutFatigue";
+import { AppContext } from "../../contexts/AppContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import * as workoutsAPI from "../../utilities/workout-api";
+import * as usersAPI from "../../utilities/users-api";
 
 // Used to display the details of any order, including the cart (unpaid order)
-export default function WorkoutDetail({
-  workout,
-  user,
-  handleRemoveExercise,
-  handleChangeQty,
-  btnLoading,
-  handleSaveWorkout,
-}) {
+export default function WorkoutDetail() {
+  const {
+    workout,
+    setWorkout,
+    setActiveWorkout,
+    setCurrentUser,
+    handleRemoveExerciseFromWorkout,
+    handleIncrementQty,
+    handleDecrementQty,
+    btnLoading,
+    setBtnLoading,
+    setLoading,
+  } = useContext(AppContext);
+
+  const navigate = useNavigate();
+
+  async function handleSaveWorkout() {
+    setBtnLoading(true);
+    const updatedUser = await usersAPI.updateFatigue();
+    setCurrentUser(updatedUser);
+    const updatedWorkout = await workoutsAPI.saveWorkout();
+    setWorkout(updatedWorkout);
+    // add setTimeout here + display message?
+    setBtnLoading(false);
+    setLoading(true);
+    setActiveWorkout(false);
+    navigate("/workouts");
+    setLoading(false);
+  }
+
   if (!workout) return null;
   const exerciseList = workout.exerciseList.map((exercise) => (
     <Exercise
-      exerciseList={exercise}
-      isDone={workout.isDone}
+      exercise={exercise}
       key={exercise._id}
-      workout={workout}
-      user={user}
-      handleRemoveExercise={handleRemoveExercise}
-      handleChangeQty={handleChangeQty}
+      handleRemoveExerciseFromWorkout={handleRemoveExerciseFromWorkout}
+      handleIncrementQty={handleIncrementQty}
+      handleDecrementQty={handleDecrementQty}
       btnLoading={btnLoading}
     />
   ));
@@ -52,11 +77,7 @@ export default function WorkoutDetail({
 
           {exerciseList.length ? (
             <div className="fat-table">
-              <WorkoutFatigue
-                user={user}
-                workout={workout}
-                exerciseList={exerciseList}
-              />
+              <WorkoutFatigue workout={workout} />
             </div>
           ) : (
             ""
@@ -67,11 +88,6 @@ export default function WorkoutDetail({
       <div>
         {exerciseList.length ? (
           <>
-            {/* <WorkoutFatigue
-                user={user}
-                workout={workout}
-                exerciseList={exerciseList}
-              /> */}
             {exerciseList}
             <div className="total">
               {workout.isDone ? (
@@ -86,12 +102,11 @@ export default function WorkoutDetail({
                 </button>
               )}
               {/* <span>{workout.totalQty}</span> */}
-              {/* <span className="right">${order.orderTotal.toFixed(2)}</span> */}
             </div>
           </>
         ) : (
           <div className="no-exercises">
-            Added exercises will be listed here.
+            Empty Workout! Added exercises will be listed here.
           </div>
         )}
       </div>

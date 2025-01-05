@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import "./AuthPage.css";
 import AppTitle from "../../components/AppTitle/AppTitle";
 import SVGDemo from "../../components/SVGDemo/SVGDemo";
+import { AppContext } from "../../contexts/AppContext";
 
-export default function AuthPage({ setUser }) {
+export default function AuthPage() {
+  const { setCurrentUser } = useContext(AppContext);
   const [showSignUp, setShowSignUp] = useState(false);
-
   return (
     <div>
       <AppTitle />
@@ -30,9 +31,9 @@ export default function AuthPage({ setUser }) {
         </div>
         <div className="make-flex">
           {showSignUp ? (
-            <SignUpForm setUser={setUser} />
+            <SignUpForm setCurrentUser={setCurrentUser} />
           ) : (
-            <LoginForm setUser={setUser} />
+            <LoginForm />
           )}
           <div className="svg-demo">
             <SVGDemo />

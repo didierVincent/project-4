@@ -1,13 +1,21 @@
+import { useContext } from "react";
+import { AppContext } from "../../contexts/AppContext";
 import { Link, useLocation } from "react-router-dom";
 import * as userService from "../../utilities/users-service";
 import "./NavBar.css";
 
-export default function NavBar({ user, setUser, setLoading }) {
-  function handleLogOut() {
+export default function NavBar() {
+  const { currentUser, setWorkout, setCurrentUser, setLoading } =
+    useContext(AppContext);
+  async function handleLogOut() {
     // Delegate to the users-service
+    setLoading(true);
     userService.logOut();
     // Update state will also cause a re-render
-    setUser(null);
+    setCurrentUser(null);
+    setWorkout(null);
+
+    setLoading(false);
   }
 
   return (
@@ -37,7 +45,7 @@ export default function NavBar({ user, setUser, setLoading }) {
         >
           New Workout
         </Link>
-        &nbsp;&nbsp;<span>Welcome, {user.name}</span>
+        &nbsp;&nbsp;<span>Welcome, {currentUser.name}</span>
         &nbsp;&nbsp;
         <Link to="" onClick={handleLogOut}>
           Log Out

@@ -1,27 +1,24 @@
 import "./WorkoutHistoryPage.css";
 import "../../components/SVGBodyHistory/SVGBodyHistory.css";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import SavedWorkouts from "../../components/SavedWorkouts/SavedWorkouts";
 import * as workoutsAPI from "../../utilities/workout-api";
 import ColorScale from "../../components/ColorScale/ColorScale";
 import UserFatigueTable from "../../components/UserFatigueTable/UserFatigueTable";
 import SVGBodyHistory from "../../components/SVGBodyHistory/SVGBodyHistory";
-import ManualButtons from "../../components/ManualButtons/ManualButtons";
+import { AppContext } from "../../contexts/AppContext";
 
-export default function WorkoutHistoryPage({
-  user,
-  setUser,
-  workout,
-  setWorkout,
-  loading,
-  setLoading,
-  activeWorkout,
-  handleResetFatigueAndWorkout,
-  handleAddRestDay,
-  btnLoading,
-  setBtnLoading,
-}) {
+export default function WorkoutHistoryPage() {
+  const {
+    currentUser,
+    workout,
+    setWorkout,
+    loading,
+    setLoading,
+    activeWorkout,
+  } = useContext(AppContext);
+
   useEffect(function () {
     async function getWorkoutHistory() {
       setLoading(true);
@@ -31,6 +28,9 @@ export default function WorkoutHistoryPage({
     }
     getWorkoutHistory();
   }, []);
+
+  console.log("typeof workout: ", typeof workout);
+  console.log("workout: ", workout);
 
   if (!loading) {
     const savedWorkouts = workout.map((pastWorkouts, counter) => (
@@ -75,14 +75,14 @@ export default function WorkoutHistoryPage({
           </div>
         </div>
         <div className="svg">
-          <div>{user.name}'s Muscles</div>
-          <SVGBodyHistory user={user} />
+          <div>{currentUser.name}'s Muscles</div>
+          <SVGBodyHistory currentUser={currentUser} />
         </div>
 
         <div className="right">
           <div className="right-title">Fatigue</div>
           <div className="uft">
-            <UserFatigueTable user={user} />
+            <UserFatigueTable currentUser={currentUser} />
           </div>
           <div className="cs">
             <ColorScale />
