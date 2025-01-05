@@ -28,7 +28,7 @@ export default function ExerciseList({
     <ExerciseListItem
       btnLoading={btnLoading}
       key={exercise._id}
-      exercises={exercise}
+      exercise={exercise}
       handleAddToWorkout={handleAddToWorkout}
     />
   ));

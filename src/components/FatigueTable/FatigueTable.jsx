@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import "./FatigueTable.css";
+import { AppContext } from "../../contexts/AppContext";
 
-export default function FatigueTable({ user, workout }) {
+export default function FatigueTable() {
+  const { currentUser, workout } = useContext(AppContext);
   const backgroundColorScale = {
     0: "var(--fat-0)",
     1: "var(--fat-0)",
@@ -50,7 +53,7 @@ export default function FatigueTable({ user, workout }) {
       <table>
         <tbody>
           <tr>
-            <th>{user.name}'s Muscles</th>
+            <th>{currentUser.name}'s Muscles</th>
             <th>
               Fatigue <br /> (Levels 0-25+)
             </th>

@@ -1,10 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as exercisesAPI from "../../utilities/exercise-api";
-import * as musclesAPI from "../../utilities/muscle-api";
-import * as workoutsAPI from "../../utilities/workout-api";
-import * as usersAPI from "../../utilities/users-api";
 import "./NewWorkoutPage.css";
 import FatigueTable from "../../components/FatigueTable/FatigueTable";
 import MuscleList from "../../components/MuscleList/MuscleList";
@@ -13,119 +9,66 @@ import WorkoutDetail from "../../components/WorkoutDetail/WorkoutDetail";
 import ColorScale from "../../components/ColorScale/ColorScale";
 import SVGBodyModel from "../../components/SVGBodyModel/SVGBodyModel";
 import ManualButtons from "../../components/ManualButtons/ManualButtons";
+import { AppContext } from "../../contexts/AppContext";
 
-export default function NewWorkoutPage({
-  user,
-  setUser,
-  workout,
-  setWorkout,
-  loading,
-  setLoading,
-  setActiveWorkout,
-  btnLoading,
-  setBtnLoading,
-}) {
-  const [exerciseList, setExerciseList] = useState([]);
-  const [activeCat, setActiveCat] = useState("");
+export default function NewWorkoutPage() {
+  const {
+    currentUser,
+    setCurrentUser,
+    workout,
+    setWorkout,
+    loading,
+    setLoading,
+    setActiveWorkout,
+    btnLoading,
+    setBtnLoading,
+    exerciseList,
+    activeCat,
+    setActiveCat,
+    categories,
+    handleAddToWorkout,
+    handleRemoveExerciseFromWorkout,
+    handleIncrementQty,
+    handleDecrementQty,
+    handleResetFatigueAndWorkout,
+    handleAddRestDay,
+  } = useContext(AppContext);
+
   const navigate = useNavigate();
 
   const categoriesRef = useRef([]);
 
-  useEffect(function () {
-    async function getExercises() {
-      setLoading(true);
-      const exercises = await exercisesAPI.getAll();
-      const muscleCats = await musclesAPI.getAll();
-      categoriesRef.current = [
-        ...new Set(muscleCats.map((muscle) => muscle.name)),
-      ];
-      setActiveCat(categoriesRef.current[0]);
-      setExerciseList(exercises);
-    }
-    getExercises();
+  // async function handleSaveWorkout() {
+  //   setBtnLoading(true);
+  //   const updatedUser = await usersAPI.updateFatigue();
+  //   setCurrentUser(updatedUser);
+  //   const updatedWorkout = await workoutsAPI.saveWorkout();
+  //   setWorkout(updatedWorkout);
+  //   // add setTimeout here + display message?
+  //   setBtnLoading(false);
+  //   setLoading(true);
+  //   setActiveWorkout(false);
+  //   navigate("/workouts");
+  // }
 
-    async function getWorkout() {
-      const workout = await workoutsAPI.getWorkout();
-      setWorkout(workout);
-      setActiveWorkout(true);
-      setLoading(false);
-    }
-    getWorkout();
-  }, []);
+  // async function handleResetFatigueAndWorkout() {
+  //   setLoading(true);
+  //   const updatedUser = await usersAPI.resetFatigue();
+  //   setCurrentUser(updatedUser);
+  //   await workoutsAPI.resetWorkout();
+  //   const updatedWorkout = await workoutsAPI.getWorkout();
+  //   setWorkout(updatedWorkout);
+  //   setLoading(false);
+  // }
 
-  useEffect(
-    function () {
-      async function fetchUserData() {
-        const updatedUser = await usersAPI.fetchData();
-        if (
-          JSON.stringify(updatedUser.fatigue) !== JSON.stringify(user.fatigue)
-        ) {
-          setUser(updatedUser);
-          setLoading(false);
-        }
-      }
-      fetchUserData();
-    },
-    [workout]
-  );
-
-  async function handleAddToWorkout(exerciseId) {
-    setBtnLoading(true);
-    const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
-    setWorkout(updatedWorkout);
-    setBtnLoading(false);
-  }
-
-  async function handleRemoveExercise(exerciseId) {
-    setBtnLoading(true);
-    const updatedWorkout = await workoutsAPI.removeExerciseFromWorkout(
-      exerciseId
-    );
-    setWorkout(updatedWorkout);
-    setBtnLoading(false);
-  }
-
-  async function handleChangeQty(exerciseId, newQty) {
-    setBtnLoading(true);
-    const updatedWorkout = await workoutsAPI.changeExerciseQty(
-      exerciseId,
-      newQty
-    );
-    setWorkout(updatedWorkout);
-    setBtnLoading(false);
-  }
-
-  async function handleSaveWorkout() {
-    setBtnLoading(true);
-    const updatedUser = await usersAPI.updateFatigue();
-    setUser(updatedUser);
-    const updatedWorkout = await workoutsAPI.saveWorkout();
-    setWorkout(updatedWorkout);
-    // add setTimeout here + display message?
-    setBtnLoading(false);
-    setLoading(true);
-    setActiveWorkout(false);
-    navigate("/workouts");
-  }
-
-  async function handleResetFatigueAndWorkout() {
-    setLoading(true);
-    const updatedUser = await usersAPI.resetFatigue();
-    setUser(updatedUser);
-    await workoutsAPI.resetWorkout();
-    const updatedWorkout = await workoutsAPI.getWorkout();
-    setWorkout(updatedWorkout);
-    setLoading(false);
-  }
-
-  async function handleAddRestDay() {
-    setBtnLoading(true);
-    const updatedUser = await usersAPI.addRestDay();
-    setUser(updatedUser);
-    const updatedWorkout = await workoutsAPI.addRestDay();
-    setWorkout(updatedWorkout);
-    setBtnLoading(false);
-  }
+  // async function handleAddRestDay() {
+  //   setBtnLoading(true);
+  //   const updatedUser = await usersAPI.addRestDay();
+  //   setCurrentUser(updatedUser);
+  //   const updatedWorkout = await workoutsAPI.addRestDay();
+  //   setWorkout(updatedWorkout);
+  //   setBtnLoading(false);
+  // }
 
   return (
     <main className="NewWorkoutPage">
@@ -133,10 +76,10 @@ export default function NewWorkoutPage({
         <>
           <aside>
             {/* replace table below with svg later */}
-            <div className="user-name">{user.name}</div>
-            <SVGBodyModel workout={workout} />
-            <FatigueTable user={user} workout={workout} />
-            <ColorScale user={user} workout={workout} />
+            <div className="user-name">{currentUser.name}</div>
+            <SVGBodyModel />
+            <FatigueTable />
+            <ColorScale />
             <ManualButtons
               handleResetFatigueAndWorkout={handleResetFatigueAndWorkout}
               handleAddRestDay={handleAddRestDay}
@@ -146,7 +89,7 @@ export default function NewWorkoutPage({
           <div className="middle">
             <div className="cat-text">Exercises by Muscle Groups</div>
             <MuscleList
-              categories={categoriesRef.current}
+              categories={categories}
               activeCat={activeCat}
               setActiveCat={setActiveCat}
             />
@@ -167,10 +110,10 @@ export default function NewWorkoutPage({
             <WorkoutDetail
               loading={loading}
               workout={workout}
-              user={user}
-              handleRemoveExercise={handleRemoveExercise}
-              handleChangeQty={handleChangeQty}
-              handleSaveWorkout={handleSaveWorkout}
+              currentUser={currentUser}
+              handleRemoveExerciseFromWorkout={handleRemoveExerciseFromWorkout}
+              handleIncrementQty={handleIncrementQty}
+              handleDecrementQty={handleDecrementQty}
               btnLoading={btnLoading}
             />
           </div>

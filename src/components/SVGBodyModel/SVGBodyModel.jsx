@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import "./SVGBodyModel.css";
+import { AppContext } from "../../contexts/AppContext";
 
-export default function SVGBodyModel({ workout }) {
+export default function SVGBodyModel() {
+  const { workout } = useContext(AppContext);
   const backgroundColorScale = {
     0: "var(--fat-0)",
     1: "var(--fat-0)",

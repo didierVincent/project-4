@@ -1,6 +1,6 @@
 import "./SVGBodyHistory.css";
 
-export default function SVGBodyHistory({ user }) {
+export default function SVGBodyHistory({ currentUser }) {
   const backgroundColorScale = {
     0: "var(--fat-0)",
     1: "var(--fat-0)",
@@ -34,9 +34,9 @@ export default function SVGBodyHistory({ user }) {
     29: "var(--fat-5)",
   };
 
-  const torso = user.fatigue.torsoFatigue;
-  const arms = user.fatigue.armsFatigue;
-  const legs = user.fatigue.legsFatigue;
+  const torso = currentUser.fatigue.torsoFatigue;
+  const arms = currentUser.fatigue.armsFatigue;
+  const legs = currentUser.fatigue.legsFatigue;
 
   const torsoFat = backgroundColorScale[torso] || "var(--fat-6)";
   const armsFat = backgroundColorScale[arms] || "var(--fat-6)";

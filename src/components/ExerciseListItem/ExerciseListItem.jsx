@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./ExerciseListItem.css";
 
 export default function ExerciseListItem({
-  exercises,
+  exercise,
   handleAddToWorkout,
   btnLoading,
 }) {
@@ -12,20 +12,20 @@ export default function ExerciseListItem({
     <div className="ExerciseListItem">
       <div className="grid-ctr1">
         <div className="grid-ctr2">
-          <div className="ExerciseName">{exercises.name}</div>
+          <div className="ExerciseName">{exercise.name}</div>
           <table className="fat-data">
             <tbody>
               <tr>
                 <th>Torso</th>
-                <th>+{exercises.torsoFatigue}</th>
+                <th>+{exercise.torsoFatigue}</th>
               </tr>
               <tr>
                 <th>Arms</th>
-                <th>+{exercises.armsFatigue}</th>
+                <th>+{exercise.armsFatigue}</th>
               </tr>
               <tr>
                 <th>Legs</th>
-                <th>+{exercises.legsFatigue}</th>
+                <th>+{exercise.legsFatigue}</th>
               </tr>
             </tbody>
           </table>
@@ -40,7 +40,7 @@ export default function ExerciseListItem({
         </div>
         <button
           className="AddButton"
-          onClick={() => handleAddToWorkout(exercises._id)}
+          onClick={() => handleAddToWorkout(exercise)}
           disabled={btnLoading}
         >
           + Add Set

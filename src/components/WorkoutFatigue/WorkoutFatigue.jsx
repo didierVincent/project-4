@@ -1,7 +1,7 @@
 import "./WorkoutFatigue.css";
 import { useMemo } from "react";
 
-export default function WorkoutFatigue({ user, workout, exerciseList }) {
+export default function WorkoutFatigue({ workout }) {
   const { totalTorsoFatigue, totalArmsFatigue, totalLegsFatigue } = useMemo(
     () => ({
       totalTorsoFatigue:

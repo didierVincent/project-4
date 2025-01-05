@@ -12,7 +12,7 @@ const fatigueSchema = new Schema({
 
 const exerciseContainerSchema = new Schema(
   {
-    qty: { type: Number, default: 1 },
+    qty: { type: Number, default: 0 },
     exercise: exerciseSchema,
   },
   {
@@ -95,23 +95,23 @@ workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
   return await workout.save();
 };
 
-workoutSchema.methods.deleteExercise = async function (exerciseId) {
-  const workout = this;
-  const existingExerciseContainer = workout.exerciseList.find((e) =>
-    e.exercise._id.equals(exerciseId)
-  );
-  // exercises are added to workouts but wrapped inside an exercise container
-  const exerciseData = existingExerciseContainer.exercise;
+// workoutSchema.methods.deleteExercise = async function (exerciseId) {
+//   const workout = this;
+//   const existingExerciseContainer = workout.exerciseList.find((e) =>
+//     e.exercise._id.equals(exerciseId)
+//   );
+//   // exercises are added to workouts but wrapped inside an exercise container
+//   const exerciseData = existingExerciseContainer.exercise;
 
-  workout.addedFatigue.torsoFatigue -=
-    existingExerciseContainer.qty * exerciseData.torsoFatigue;
-  workout.addedFatigue.armsFatigue -=
-    existingExerciseContainer.qty * exerciseData.armsFatigue;
-  workout.addedFatigue.legsFatigue -=
-    existingExerciseContainer.qty * exerciseData.legsFatigue;
-  await existingExerciseContainer.deleteOne();
-  return await workout.save();
-};
+//   workout.addedFatigue.torsoFatigue -=
+//     existingExerciseContainer.qty * exerciseData.torsoFatigue;
+//   workout.addedFatigue.armsFatigue -=
+//     existingExerciseContainer.qty * exerciseData.armsFatigue;
+//   workout.addedFatigue.legsFatigue -=
+//     existingExerciseContainer.qty * exerciseData.legsFatigue;
+//   await existingExerciseContainer.deleteOne();
+//   return await workout.save();
+// };
 
 // Instance method for inc/dec buttons
 workoutSchema.methods.setExerciseQty = async function (exerciseId, newQty) {
