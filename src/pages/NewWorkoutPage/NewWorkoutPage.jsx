@@ -70,6 +70,8 @@ export default function NewWorkoutPage() {
   //   setBtnLoading(false);
   // }
 
+  // testing commit on new device //
+
   return (
     <main className="NewWorkoutPage">
       {!loading ? (
